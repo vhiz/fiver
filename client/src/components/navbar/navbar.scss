@@ -1,0 +1,45 @@
+.navbar {
+  display: flex;
+  background-color: #993750;
+  color: white;
+  .contanier {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    .logo {
+      font-size: 34px;
+      font-weight: bold;
+
+      span {
+        &:nth-child(2) {
+          color: #1dbf73;
+        }
+      }
+    }
+    .links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      font-weight: 500;
+
+      button {
+        padding: 10px 20px;
+        align-items: center;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-weight: bold;
+        background-color: transparent;
+        border-radius: 5px;
+        border: 1px solid white;
+        color: inherit;
+
+        &:hover {
+          background-color: green;
+          color: white;
+        }
+      }
+    }
+  }
+}
