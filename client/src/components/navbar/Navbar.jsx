@@ -20,13 +20,13 @@ export default function Navbar({ color }) {
     };
   }, []);
 
-  // const currentUser = {
-  //   id: 1,
-  //   username: "vhiz",
-  //   isSeller: true,
-  //   img: "/img/vhiz.png",
-  // };
-  const currentUser = null;
+  const currentUser = {
+    id: 1,
+    username: "vhiz",
+    isSeller: true,
+    img: "/img/vhiz.png",
+  };
+  // const currentUser = null;
   return (
     <>
       <div
@@ -44,11 +44,13 @@ export default function Navbar({ color }) {
           </div>
           {pathname !== "/" && (
             <div className="search">
-              <input
-                type="text"
-                placeholder="What Servive are you looking for today"
-              />
-              <button>Search</button>
+              <div className="searchInput">
+                <input
+                  type="text"
+                  placeholder="What Servive are you looking for today"
+                />
+                <button>Search</button>
+              </div>
             </div>
           )}
           {active && (
@@ -95,7 +97,7 @@ export default function Navbar({ color }) {
                 <span>Music & Audio</span>
               </Link>
               <Link className="link">
-                <span>Programming & Tech Photography Business AI Services</span>
+                <span>Programming & Tech</span>
               </Link>
               <Link className="link">
                 <span>Photography</span>
@@ -130,7 +132,7 @@ export default function Navbar({ color }) {
                 <span>Music & Audio</span>
               </Link>
               <Link className="link">
-                <span>Programming & Tech Photography Business AI Services</span>
+                <span>Programming & Tech</span>
               </Link>
               <Link className="link">
                 <span>Photography</span>

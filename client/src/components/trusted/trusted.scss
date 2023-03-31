@@ -1,0 +1,16 @@
+.trusted {
+  background-color: #fafafa;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  
+
+  .contanier{
+    display: flex;
+    align-items: center;
+    color: lightgray;
+    gap: 50px;
+    font-weight: bold;
+    justify-content: center;
+  }
+}

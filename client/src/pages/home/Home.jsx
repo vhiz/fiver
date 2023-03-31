@@ -3,6 +3,13 @@ import React, { useEffect, useState } from "react";
 import Featured from "../../components/featured/Featured";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
+import Trusted from "../../components/trusted/Trusted";
+import Slide from "../../components/slider/Slider";
+import { cards, recently } from "../../data";
+import CatCard from "../../components/catCard/CatCard";
+import RecentlyCard from "../../components/recently/Recently";
+import Features from "../../components/features/Features";
+import Business from "../../components/business/Business";
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,7 +36,7 @@ export default function Home() {
       id: 4,
       img: "/img/4.webp",
       color: "#60192a",
-      title:'Ritika, Shoemaker, Desinger '
+      title: "Ritika, Shoemaker, Desinger ",
     },
     {
       id: 5,
@@ -49,16 +56,32 @@ export default function Home() {
     const interval = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * data.length);
       setCurrentIndex(randomIndex);
-    }, 6000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [data.length]);
 
   return (
     <div className="home">
-      {/* <h1>{data[currentIndex].img}</h1> */}
       <Navbar color={data[currentIndex].color} />
       <Featured img={data[currentIndex].img} name={data[currentIndex].title} />
+      <Trusted />
+      {/* <Slide h1={"Recently Viewed & More "} arrowsScroll={4} slidesToShow={4}>
+        {recently.map((item) => (
+          <RecentlyCard key={item.id} item={item} />
+        ))}
+      </Slide> */}
+      <Slide
+        h1={"Popular professional services"}
+        arrowsScroll={4}
+        slidesToShow={4}
+      >
+        {cards.map((card) => (
+          <CatCard key={card.id} item={card} />
+        ))}
+      </Slide>
+      <Features />
+      <Business />
       <Footer />
     </div>
   );
