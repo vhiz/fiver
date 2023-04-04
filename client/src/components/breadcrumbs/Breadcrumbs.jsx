@@ -6,14 +6,17 @@ const Breadcrumbs = () => {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
+  const handleClick = (pathname) => {
+    const routeTo = `/${pathname}`;
+    window.history.pushState({}, '', routeTo);
+  }
+
   return (
     <div className="breadcrumbs">
       {pathnames.length > 0 && (
         <ul>
           <li>
-            <Link to="/" className="link">
-              Home
-            </Link>
+            <Link to="/" className="link" onClick={() => handleClick('')}>Home</Link>
           </li>
           {pathnames.map((pathname, index) => {
             const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
@@ -28,7 +31,7 @@ const Breadcrumbs = () => {
               <li key={pathname}>{pathname}</li>
             ) : (
               <li key={pathname}>
-                <Link to={routeTo}>{pathname}</Link>
+                <Link to={routeTo} onClick={() => handleClick(routeTo)}>{pathname}</Link>
               </li>
             );
           })}

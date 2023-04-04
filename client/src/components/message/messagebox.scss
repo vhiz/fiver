@@ -1,0 +1,30 @@
+.messagebox {
+  display: flex;
+  gap: 20px;
+  max-width: 600px;
+  font-size: 18px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  p {
+    padding: 20px;
+    background-color: #eeeded;
+    border-radius: 0 20px 20px 20px;
+    font-weight: 300;
+  }
+
+  &.own {
+    flex-direction: row-reverse;
+    align-self: flex-end;
+    p {
+      border-radius: 20px 0 20px 20px;
+      background-color: royalblue;
+      color: white;
+    }
+  }
+}

@@ -24,7 +24,7 @@ export default function Messages() {
           <tr className="active">
             <td>Gustavo</td>
             <td>
-              <Link to={'/app/message/1'} className="link">{message.substring(0, 100)}.....</Link>
+              <Link to={'/app/messages/1'} className="link">{message.substring(0, 100)}.....</Link>
             </td>
             <td>{moment(Date.now()).fromNow()}</td>
             <td>
@@ -34,7 +34,7 @@ export default function Messages() {
           <tr className="active">
             <td>Gustavo</td>
             <td>
-              <Link to={'/message/1'} className="link">{message.substring(0, 100)}.....</Link>
+              <Link to={'/app/messages/1'} className="link">{message.substring(0, 100)}.....</Link>
             </td>
             <td>{moment(Date.now()).fromNow()}</td>
             <td>
@@ -44,14 +44,14 @@ export default function Messages() {
           <tr>
             <td>Gustavo</td>
             <td>
-              <Link to={'/message/1'} className="link">{message.substring(0, 100)}.....</Link>
+              <Link to={'/app/messages/1'} className="link">{message.substring(0, 100)}.....</Link>
             </td>
             <td>{moment(Date.now()).fromNow()}</td>
           </tr>
           <tr>
             <td>Gustavo</td>
             <td>
-              <Link to={'/message/1'} className="link">{message.substring(0, 100)}.....</Link>
+              <Link to={'/app/messages/1'} className="link">{message.substring(0, 100)}.....</Link>
             </td>
             <td>{moment(Date.now()).fromNow()}</td>
           </tr>
