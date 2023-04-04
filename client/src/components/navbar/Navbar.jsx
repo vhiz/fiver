@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Options from "./Options";
 import "./navbar.scss";
-import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar({ color }) {
-  const [active, setactive] = useState(false);
+  const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
-
   const { pathname } = useLocation();
 
-  const isActive = () => {
-    window.scrollY > 0 ? setactive(true) : setactive(false);
+  const handleScroll = () => {
+    setActive(window.scrollY > 0);
   };
-  useEffect(() => {
-    window.addEventListener("scroll", isActive);
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener("scroll", isActive);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -26,14 +25,16 @@ export default function Navbar({ color }) {
     isSeller: true,
     img: "/img/vhiz.png",
   };
-  // const currentUser = null;
+
+  const shouldShowSearch = pathname !== "/" || active;
+
+  const shouldShowMenu = pathname !== "/" || active;
+
   return (
     <>
       <div
-        className={active || pathname !== "/" ? "navbar active" : "navbar"}
-        style={
-          !active && pathname === "/" ? { backgroundColor: `${color}` } : null
-        }
+        className={`navbar ${active || pathname !== "/" ? "active" : ""}`}
+        style={!active && pathname === "/" ? { backgroundColor: color } : null}
       >
         <div className="contanier">
           <div className="logo">
@@ -42,26 +43,17 @@ export default function Navbar({ color }) {
             </Link>
             <span>.</span>
           </div>
-          {pathname !== "/" && (
-            <div className="search">
-              <div className="searchInput">
-                <input
-                  type="text"
-                  placeholder="What Servive are you looking for today"
-                />
-                <button>Search</button>
-              </div>
-            </div>
-          )}
-          {active && (
+
+          {shouldShowSearch && (
             <div className="search">
               <input
                 type="text"
-                placeholder="What Servive are you looking for today"
+                placeholder="What Service are you looking for today"
               />
               <button>Search</button>
             </div>
           )}
+
           <div className="links">
             <span>Fiverr Business</span>
             <span>Explore</span>
@@ -77,7 +69,8 @@ export default function Navbar({ color }) {
             )}
           </div>
         </div>
-        {pathname !== "/" && (
+
+        {shouldShowMenu && (
           <>
             <hr />
             <div className="menu">
@@ -88,42 +81,7 @@ export default function Navbar({ color }) {
                 <span>Digital Marketing</span>
               </Link>
               <Link className="link">
-                <span>Writting & Translation</span>
-              </Link>
-              <Link className="link">
-                <span>Video & Animation</span>
-              </Link>
-              <Link className="link">
-                <span>Music & Audio</span>
-              </Link>
-              <Link className="link">
-                <span>Programming & Tech</span>
-              </Link>
-              <Link className="link">
-                <span>Photography</span>
-              </Link>
-              <Link className="link">
-                <span>Business</span>
-              </Link>
-              <Link className="link">
-                <span>AI Services</span>
-              </Link>
-            </div>
-            <hr />
-          </>
-        )}
-        {active && (
-          <>
-            <hr />
-            <div className="menu">
-              <Link className="link">
-                <span>Graphics & Design</span>
-              </Link>
-              <Link className="link">
-                <span>Digital Marketing</span>
-              </Link>
-              <Link className="link">
-                <span>Writting & Translation</span>
+                <span>Writing & Translation</span>
               </Link>
               <Link className="link">
                 <span>Video & Animation</span>
@@ -148,9 +106,8 @@ export default function Navbar({ color }) {
           </>
         )}
       </div>
-      {open && (
-        <Options currentUser={currentUser} setOpen={setOpen} open={open} />
-      )}
+
+      {open && <Options currentUser={currentUser} setOpen={setOpen} />}
     </>
   );
 }

@@ -27,7 +27,6 @@ export default function RecentlyCard({ item }) {
         <div className="rating">
           {item.rating} <span>({item.view})</span>
         </div>
-        <hr />
         <div className="price">
           <img src="/icon/like.png" alt="" />
           <span>STARTING AT ${item.price}</span>

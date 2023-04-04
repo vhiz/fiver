@@ -5,11 +5,12 @@ import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import Trusted from "../../components/trusted/Trusted";
 import Slide from "../../components/slider/Slider";
-import { cards, recently } from "../../data";
+import { cards, gigs, projects } from "../../data";
 import CatCard from "../../components/catCard/CatCard";
-import RecentlyCard from "../../components/recently/Recently";
 import Features from "../../components/features/Features";
 import Business from "../../components/business/Business";
+import ProjectCard from "../../components/projectCard/ProjectCard";
+import GigCard from "../../components/gigcard/GigCard";
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -66,11 +67,15 @@ export default function Home() {
       <Navbar color={data[currentIndex].color} />
       <Featured img={data[currentIndex].img} name={data[currentIndex].title} />
       <Trusted />
-      {/* <Slide h1={"Recently Viewed & More "} arrowsScroll={4} slidesToShow={4}>
-        {recently.map((item) => (
-          <RecentlyCard key={item.id} item={item} />
+      <Slide
+        h1={"Recently Viewed & More "}
+        arrowsScroll={3}
+        slidesToShow={3}
+      >
+        {gigs.map(gig=>(
+          <GigCard key={gig.id} item={gig}/>
         ))}
-      </Slide> */}
+      </Slide>
       <Slide
         h1={"Popular professional services"}
         arrowsScroll={4}
@@ -82,6 +87,15 @@ export default function Home() {
       </Slide>
       <Features />
       <Business />
+      <Slide
+        h1={"Get inspired with projects made by our freelancers"}
+        arrowsScroll={4}
+        slidesToShow={4}
+      >
+        {projects.map((card) => (
+          <ProjectCard key={card.id} item={card} />
+        ))}
+      </Slide>
       <Footer />
     </div>
   );

@@ -1,0 +1,41 @@
+.breadcrumbs {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #999;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  ul {
+    display: flex;
+    li {
+      display: flex;
+      align-items: center;
+      margin-right: 0.5rem;
+
+      &::before {
+        content: "›";
+        margin-right: 0.5rem;
+        color: #aaa;
+      }
+
+      &:last-child::before {
+        content: "";
+        margin-right: 0;
+      }
+
+      a {
+        color: #999;
+
+        &:hover {
+          color: #333;
+        }
+      }
+    }
+
+    .active {
+      font-weight: bold;
+      color: #333;
+    }
+  }
+}

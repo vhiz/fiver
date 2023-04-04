@@ -61,149 +61,240 @@ export const cards = [
   },
 ];
 
-export const recently = [
+export const gigs = [
   {
     id: 1,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
-    level: true,
   },
   {
     id: 2,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
   },
   {
     id: 3,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
   },
   {
     id: 4,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
-    level: true,
   },
   {
     id: 5,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
   },
   {
     id: 6,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
-    level: true,
   },
   {
     id: 7,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
   },
   {
     id: 8,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
   },
   {
     id: 9,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
   },
   {
     id: 10,
-    imgs: [
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/bdbd320506e2f8d01624299e43bf4c7f-1678923405/Adventurer%20EDITED.png",
-      "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/attachments/delivery/asset/2d0490152566d63dec1d3c9aec78adb2-1679003445/flowerdragon1.png",
-    ],
-    title: "lucassobrinho",
+    img: "https://fiverr-res.cloudinary.com/t_gig_cards_web,q_auto,f_auto/gigs/146769781/original/a77599481de5680c7473c05f389ffb4270871e51.png",
+
+    username: "lucassobrinho",
     rating: 5.0,
-    view: "1k",
+    star: 5,
+    desc: "this is descricption for test",
     profile:
       "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/a88bc096f5150b900c6ed40916a9b425-1423610811673570913.683484/AC210C0C-E82C-4C09-92DA-94556A6D4E9B",
     price: 200,
-    level: true,
+  },
+];
+
+export const projects = [
+  {
+    id: 16,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 17,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 18,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 19,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 20,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 30,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 2,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 3,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 4,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 5,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 6,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 8,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 9,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 10,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 11,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
+  },
+  {
+    id: 12,
+    img: "https://fiverr-res.cloudinary.com/q_auto,f_auto,w_320,dpr_1.0/v1/attachments/generic_asset/asset/f23a46693ef0e611430e232cbc989e2b-1617004615069/noneyn.png",
+    pp: "https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/23b01eca3b78e2869e149efe15d3066a-1613424545655/0aaffa8e-01e0-4dcb-b56d-674e9b9c4bf5.jpg",
+    cat: "Potraits & Carlcatures",
+    username: "noneyn",
   },
 ];

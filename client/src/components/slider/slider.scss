@@ -6,6 +6,9 @@
     width: 100%;
     padding: 30px;
 
+    .carousel-initialized{
+      padding: 10px !important;
+    }
     .carousel-prev,
     .carousel-next {
       width: 50px;
