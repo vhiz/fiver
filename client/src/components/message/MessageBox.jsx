@@ -1,18 +1,26 @@
+import { useQuery } from "@tanstack/react-query";
 import "./messagebox.scss";
+import { makeRequest } from "../../axios";
 
-export default function MessageBox({ own }) {
+export default function MessageBox({ own, message }) {
+  const { error, isLoading, data } = useQuery(
+    ["messagesUser", message.userId],
+    async () => {
+      const res = await makeRequest.get(`/users/${message.userId}`);
+      return res.data;
+    }
+  );
+
   return (
     <div className={own ? "messagebox own" : "messagebox"}>
-      <img
-        src="https://fiverr-res.cloudinary.com/t_profile_thumb,q_auto,f_auto/attachments/profile/photo/8b60be1bf2915ddc1d551eaa252684d7-1589020928117/1d531e54-7607-4bdb-815f-088dbc0fb971.jpg"
-        alt=""
-      />
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-        exercitationem, cupiditate temporibus autem sequi, obcaecati aliquid
-        quasi quas quia eligendi tempora impedit fuga amet recusandae in
-        nesciunt earum eos laborum?
-      </p>
+      {isLoading ? (
+        "loading.."
+      ) : error ? (
+        "error"
+      ) : (
+        <img src={data.img || "/icon/no.png"} alt="" />
+      )}
+      <p>{message.desc}</p>
     </div>
   );
 }

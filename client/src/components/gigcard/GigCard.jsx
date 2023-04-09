@@ -1,20 +1,34 @@
-import React from "react";
 import "./gigcard.scss";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
 export default function GigCard({ item }) {
+  const { error, isLoading, data } = useQuery(["gigCard", item], async () => {
+    const res = await makeRequest.get(`/users/${item.userId}`);
+    return res.data;
+  });
   return (
-    <Link to={"/app/gig/"+ item.id} className="link">
+    <Link to={"/app/gig/" + item._id} className="link">
       <div className="gigCard">
-        <img src={item.img} alt="" />
+        <img src={item.cover} alt="" />
         <div className="info">
-          <div className="user">
-            <img src={item.profile} alt="" />
-            <span>{item.username}</span>
-          </div>
-          <p>{item.desc}</p>
+          {isLoading ? (
+            "Loading..."
+          ) : error ? (
+            "Something went worng"
+          ) : (
+            <div className="user">
+              <img src={data.img || "/icon/no.png"} alt="" />
+              <span>{data.username}</span>
+            </div>
+          )}
+          <p>{item.shortDesc}</p>
           <div className="star">
             <img src="/icon/star.png" alt="" />
-            <span>{item.star}</span>
+            <span>
+              {!isNaN(item.totalStars / item.startNumber) &&
+                Math.round(item.totalStars / item.startNumber)}
+            </span>
           </div>
         </div>
         <div className="details">

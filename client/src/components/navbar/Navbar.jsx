@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Options from "./Options";
 import "./navbar.scss";
+import { AuthContext } from "../../context/authContex";
+import { cards } from "../../data";
 
 export default function Navbar({ color }) {
   const [active, setActive] = useState(false);
@@ -19,12 +21,15 @@ export default function Navbar({ color }) {
     };
   }, []);
 
-  const currentUser = {
-    id: 1,
-    username: "vhiz",
-    isSeller: true,
-    img: "/img/vhiz.png",
+  const navigate = useNavigate();
+
+  const [input, setInput] = useState("");
+
+  const handleSubmit = async () => {
+    navigate(`/app/gigs?search=${input}`);
   };
+
+  const { currentUser } = useContext(AuthContext);
 
   const shouldShowSearch = pathname !== "/" || active;
 
@@ -46,11 +51,15 @@ export default function Navbar({ color }) {
 
           {shouldShowSearch && (
             <div className="search">
-              <input
-                type="text"
-                placeholder="What Service are you looking for today"
-              />
-              <button>Search</button>
+              <div className="searchInput">
+                <input
+                  type="text"
+                  placeholder='Try "building a mobile app"'
+                  value={input} // Set the input value to the state value
+                  onChange={(e) => setInput(e.target.value)}
+                />
+              </div>
+              <button onClick={handleSubmit}>Search</button>
             </div>
           )}
 
@@ -59,11 +68,19 @@ export default function Navbar({ color }) {
             <span>Explore</span>
             <span>English</span>
             {!currentUser?.isSeller && <span>Become a Seller</span>}
-            {!currentUser && <span>Sigin In</span>}
-            {!currentUser && <button>Join</button>}
+            {!currentUser && (
+              <Link to={"/app/login"} className="link">
+                <span>Sigin In</span>
+              </Link>
+            )}
+            {!currentUser && (
+              <Link to={"/app/register"} className="link">
+                <button>Join</button>
+              </Link>
+            )}
             {currentUser && (
               <div className="user" onClick={() => setOpen(!open)}>
-                <img src={currentUser.img} alt="" />
+                <img src={currentUser.img || "/icon/no.png"} alt="" />
                 <span>{currentUser.username}</span>
               </div>
             )}
@@ -74,33 +91,15 @@ export default function Navbar({ color }) {
           <>
             <hr />
             <div className="menu">
-              <Link className="link">
-                <span>Graphics & Design</span>
-              </Link>
-              <Link className="link">
-                <span>Digital Marketing</span>
-              </Link>
-              <Link className="link">
-                <span>Writing & Translation</span>
-              </Link>
-              <Link className="link">
-                <span>Video & Animation</span>
-              </Link>
-              <Link className="link">
-                <span>Music & Audio</span>
-              </Link>
-              <Link className="link">
-                <span>Programming & Tech</span>
-              </Link>
-              <Link className="link">
-                <span>Photography</span>
-              </Link>
-              <Link className="link">
-                <span>Business</span>
-              </Link>
-              <Link className="link">
-                <span>AI Services</span>
-              </Link>
+              {cards.map((card) => (
+                <Link
+                  className="link"
+                  key={card.id}
+                  to={`/app/gigs?cat=${card.cat}`}
+                >
+                  <span>{card.title}</span>
+                </Link>
+              ))}
             </div>
             <hr />
           </>

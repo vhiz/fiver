@@ -60,7 +60,7 @@
         span {
           color: #555;
           font-weight: 300;
-          
+
           &:nth-child(2) {
             color: black;
             font-weight: normal;
@@ -92,10 +92,12 @@
       }
     }
 
-    .cards{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      
     }
   }
 }

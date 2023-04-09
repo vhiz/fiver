@@ -1,17 +1,41 @@
 import { useState } from "react";
 import "./gigs.scss";
-import { gigs } from "../../data";
 import GigCard from "../../components/gigcard/GigCard";
 import Breadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
+import { useQuery } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
+import { useLocation } from "react-router-dom";
 
 export default function Gigs() {
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("sales");
 
+  const { search } = useLocation();
   const reSort = (type) => {
     setSort(type);
     setOpen(false);
   };
+
+  const [prices, setPrices] = useState({
+    min: 0,
+    max: 9999,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPrices((prevInputs) => ({ ...prevInputs, [name]: value }));
+  };
+  const {
+    error,
+    isLoading,
+    data: gigs,
+  } = useQuery(["gigs",search, prices, sort], async () => {
+    const res = await makeRequest.get(
+      `/gigs${search}&minPrice=${prices.min}&maxPrice=${prices.max}&sort=${sort}`
+    );
+    return res.data;
+  });
+
   return (
     <div className="gigs">
       <div className="contanier">
@@ -23,8 +47,20 @@ export default function Gigs() {
         <div className="menu">
           <div className="left">
             <span>Budget</span> :
-            <input type="number" placeholder="min" min={0} />
-            <input type="number" placeholder="max" min={0} />
+            <input
+              type="number"
+              placeholder="min"
+              min={0}
+              name="min"
+              onChange={handleChange}
+            />
+            <input
+              type="number"
+              placeholder="max"
+              min={0}
+              name="max"
+              onChange={handleChange}
+            />
             <button>Apply</button>
           </div>
           <div className="right">
@@ -48,11 +84,18 @@ export default function Gigs() {
             )}
           </div>
         </div>
-
         <div className="cards">
-          {gigs.map((item) => (
-            <GigCard key={item.id} item={item} />
-          ))}
+          {isLoading ? (
+            <div className="load">
+              <img src="/icon/loading.gif" alt="" />
+            </div>
+          ) : error ? (
+            <div className="load">
+              <img src="/icon/error.gif" alt="" />
+            </div>
+          ) : (
+            gigs.map((item) => <GigCard key={item._id} item={item} />)
+          )}
         </div>
       </div>
     </div>

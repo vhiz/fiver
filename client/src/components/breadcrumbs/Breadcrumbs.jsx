@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./breadcrumbs.scss";
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({cat}) => {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
@@ -26,6 +26,9 @@ const Breadcrumbs = () => {
             }
             if (pathname === "gig") {
               return null;
+            }
+            if (pathname.length > 15) {
+              return cat || 'message';
             }
             return isLast ? (
               <li key={pathname}>{pathname}</li>

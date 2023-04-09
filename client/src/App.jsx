@@ -11,6 +11,10 @@ import Messages from "./pages/messages/Messages";
 import Message from "./pages/message/Message";
 import MyGig from "./pages/myGig/MyGig";
 import "./app.scss";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Pay from "./pages/pay/Pay";
+import Success from "./pages/success/Success";
 
 export default function App() {
   const Layout = () => {
@@ -54,6 +58,22 @@ export default function App() {
         {
           path: "mygig",
           element: <MyGig />,
+        },
+        {
+          path: "login",
+          element: <Login />,
+        },
+        {
+          path: "register",
+          element: <Register />,
+        },
+        {
+          path: "pay/:id",
+          element: <Pay />,
+        },
+        {
+          path: "success",
+          element: <Success />,
         },
       ],
     },

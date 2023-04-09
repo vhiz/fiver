@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./carcard.scss";
 export default function CatCard({ item, handleLinkClick }) {
   return (
-    <Link to={`/app/gigs?cat=${item.id}`}>
+    <Link to={`/app/gigs?cat=${item.cat}`}>
       <div className="catCard" onClick={handleLinkClick}>
         <img src={item.img} alt="" />
         <span>{item.desc}</span>
