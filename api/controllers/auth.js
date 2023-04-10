@@ -1,6 +1,7 @@
 import bcryptjs from "bcryptjs";
 import User from "../model/User.js";
 import Jwt from "jsonwebtoken";
+import "dotenv/config.js";
 
 export const Register = async (req, res) => {
   try {
@@ -60,6 +61,9 @@ export const Login = async (req, res) => {
     res
       .cookie("fiverrToken", token, {
         httpOnly: true,
+        secure: true,
+        domain: process.env.ALLOWED_ORIGIN,
+        path: "/",
       })
       .status(200)
       .json(user);
@@ -68,8 +72,11 @@ export const Login = async (req, res) => {
   }
 };
 export const Logout = (req, res) => {
-  res.clearCookie("fiverrToken", {
-    sameSite: "none",
-    secure: true,
-  }).status(200).json('loged out');
+  res
+    .clearCookie("fiverrToken", {
+      sameSite: "none",
+      secure: true,
+    })
+    .status(200)
+    .json("loged out");
 };
