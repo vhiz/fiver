@@ -60,6 +60,7 @@ export const Login = async (req, res) => {
     const { password, updatedAt, ...user } = existingUser._doc;
     res
       .cookie("fiverrToken", token, {
+        httpOnly: true,
         secure: true,
         domain: process.env.ALLOWED_ORIGIN,
         path: "/",
