@@ -79,8 +79,8 @@ export default function Footer() {
         </div>
         <div className="bottom">
           <div className="left">
-            <h2>fiverr</h2>
-            <span>© Fiverr International Ltd. 2023</span>
+            <h2>kachyco</h2>
+            <span>© kachyco International Ltd. 2023</span>
           </div>
           <div className="right">
             <div className="social">

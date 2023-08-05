@@ -44,7 +44,7 @@ export default function Navbar({ color }) {
         <div className="contanier">
           <div className="logo">
             <Link to={"/"} className="link">
-              <span>fiverr</span>
+              <span>kachyco</span>
             </Link>
             <span>.</span>
           </div>
@@ -64,7 +64,6 @@ export default function Navbar({ color }) {
           )}
 
           <div className="links">
-            <span>Fiverr Business</span>
             <span>Explore</span>
             <span>English</span>
             {!currentUser?.isSeller && <span>Become a Seller</span>}

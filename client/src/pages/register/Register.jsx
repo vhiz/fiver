@@ -30,8 +30,10 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    const url = await uploadFile(file);
+    let url;
+    if (file) {
+      url = await uploadFile(file);
+    }
     try {
       await makeRequest.post("/auth/register", {
         ...user,
@@ -41,7 +43,7 @@ export default function Register() {
       navigate("/app/login");
       setLoading(false);
     } catch (error) {
-      setError(error.response.data.error);
+      setError(error.response.data);
     }
     setLoading(false);
   };

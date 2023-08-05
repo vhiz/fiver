@@ -103,7 +103,7 @@ export default function Home() {
         ))}
       </Slide>
       <Features />
-      <Business />
+      {/* <Business /> */}
       {isLoading ? (
         <div className="load">
           <img src="/icon/loading.gif" alt="" />

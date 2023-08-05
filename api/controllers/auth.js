@@ -61,9 +61,6 @@ export const Login = async (req, res) => {
     res
       .cookie("fiverrToken", token, {
         httpOnly: true,
-        secure: true,
-        domain: process.env.ALLOWED_ORIGIN,
-        path: "/",
       })
       .status(200)
       .json(user);
