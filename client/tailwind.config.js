@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
-export default {
+const { withAnimations } = require("animated-tailwindcss");
+export default withAnimations({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 
   theme: {
@@ -16,4 +17,4 @@ export default {
   daisyui: {
     themes: ["bumblebee", "business"],
   },
-};
+});
