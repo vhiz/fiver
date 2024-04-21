@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { CiSearch } from "react-icons/ci";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [active, setActive] = useState(false);
-  const user = false;
+  const user = true;
   function isActive() {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   }
@@ -12,19 +14,37 @@ export default function Navbar() {
       window.removeEventListener("scroll", isActive);
     };
   }, []);
+  const { pathname } = useLocation();
   return (
     <div
-      className={`fixed z-50 top-0 left-0 w-full flex flex-col duration-300 `}
+      className={`${
+        pathname === "/" ? "fixed" : "sticky"
+      } z-50 top-0 left-0 w-screen flex flex-col duration-300 `}
     >
       <div
         className={`flex w-full justify-between h-[10vh] duration-300 p-3 ${
-          active ? "bg-base-100 text-black" : "bg-transparent text-white"
+          active || pathname !== "/"
+            ? "bg-base-100 text-black"
+            : "bg-transparent text-white"
         }`}
       >
-        <div className="text-3xl flex font-semibold font-mono">
-          <h2 className="btn btn-ghost text-3xl font-semibold font-mono">
+        <div className="text-3xl flex font-semibold font-mono gap-x-5">
+          <Link to={'/'} className="btn btn-ghost text-3xl font-semibold font-mono">
             Fiverr<span className="text-green-400">.</span>
-          </h2>
+          </Link>
+          <label
+            className={`input input-bordered flex items-center pr-0 gap-2 w-[30vw] ${
+              active || pathname !== "/" ? "animate-flipInX" : "animate-flipOutX"
+            }`}
+          >
+            <CiSearch className="w-6 h-6 opacity-70 text-gray-400" />
+            <input
+              type="text "
+              className="grow text-gray-500"
+              placeholder="What are you looking for"
+            />
+            <button className="bg-green-500 btn text-white">Search</button>
+          </label>
         </div>
         <div className="flex">
           <button className="btn btn-ghost">Fiverr Business</button>
@@ -54,20 +74,24 @@ export default function Navbar() {
                 tabIndex={0}
                 className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 text-gray-500 rounded-box w-52"
               >
+                {user?.isSeller && (
+                  <>
+                    <li>
+                      <Link to={'/gigs'}>Gig</Link>
+                    </li>
+                    <li>
+                      <Link>Add new Gig</Link>
+                    </li>
+                  </>
+                )}
                 <li>
-                  <a>Gig</a>
+                  <Link>Orders</Link>
                 </li>
                 <li>
-                  <a>Add new Gig</a>
+                  <Link>Messages</Link>
                 </li>
                 <li>
-                  <a>Orders</a>
-                </li>
-                <li>
-                  <a>Messages</a>
-                </li>
-                <li>
-                  <a>Logout</a>
+                  <Link>Logout</Link>
                 </li>
               </ul>
             </div>
@@ -76,7 +100,7 @@ export default function Navbar() {
       </div>
       <div
         className={`px-3 flex justify-between border-y border-gray-300 bg-white ${
-          active ? "animate-flipInX" : "animate-flipOutX"
+          active || pathname !== "/" ? "animate-flipInX" : "animate-flipOutX"
         }`}
       >
         <a className="h-4 text-gray-400 font-thin btn btn-ghost ">

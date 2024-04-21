@@ -15,6 +15,6 @@ export default withAnimations({
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["bumblebee", "business"],
+    themes: ["bumblebee"],
   },
 });
