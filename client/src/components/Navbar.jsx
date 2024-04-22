@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const [active, setActive] = useState(false);
-  const user = true;
+  const user = null;
   function isActive() {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   }
@@ -46,7 +46,7 @@ export default function Navbar() {
             <button className="bg-green-500 btn text-white">Search</button>
           </label>
         </div>
-        <div className="flex">
+        <div className="flex px-3">
           <button className="btn btn-ghost">Fiverr Business</button>
           <button className="btn btn-ghost">Explore</button>
           <button className="btn btn-ghost">English</button>
@@ -54,7 +54,7 @@ export default function Navbar() {
           {!user ? (
             <div className="flex gap-x-3">
               <button className="btn btn-ghost">Sign in</button>
-              <button className="btn btn-ghost btn-outline">Join</button>
+              <button className={`btn btn-ghost btn-outline btn-success ${ active || pathname !== "/"?'border-green-400 text-green-400':'border-white text-white'}`}>Join</button>
             </div>
           ) : (
             <div className="dropdown dropdown-end">
