@@ -2,8 +2,8 @@ import { CiCircleCheck } from "react-icons/ci";
 
 export default function Business() {
   return (
-    <div className="p-3 my-4 bg-blue-950 text-white flex gap-24 h-[70vh]">
-      <div className="flex-1 flex justify-center flex-col gap-y-4">
+    <div className="p-2 lg:p-3 my-4 bg-blue-950 text-white flex gap-24 lg:h-[70vh]">
+      <div className="lg:flex-1 flex justify-center flex-col gap-y-4">
         <h2 className="text-3xl font-semibold">
           fiverr <i className="font-thin">business</i>
         </h2>
@@ -32,7 +32,7 @@ export default function Business() {
           Explore Fiverr Business
         </button>
       </div>
-      <div className="flex-1 relative items-center flex justify-center w-full h-full">
+      <div className="hidden lg:flex lg:flex-1 relative items-center justify-center w-full h-full">
         <img src="/business.png" alt="" className="w-full h-[90%] object-contain" />
       </div>
     </div>

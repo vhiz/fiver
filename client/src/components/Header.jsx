@@ -62,23 +62,28 @@ export default function Header() {
   }, [data.length]);
   return (
     <div
-      className={`w-ful h-screen duration-300 ${data[currentIndex].color} text-white flex items-center justify-center px-4`}
+      className={`w-full h-screen duration-300 ${data[currentIndex].color} text-white flex items-center justify-center px-4`}
     >
-      <div className="flex-1 w-full items-center justify-center flex flex-col gap-y-7">
-        <h2 className="text-5xl font-semibold capitalize">
+      <div className="lg:flex-1 w-full items-center justify-center flex flex-col gap-y-7">
+        <h2 className="text- md:text-4xl lg:text-5xl font-semibold capitalize">
           Find the perfect <i className="font-thin">freelance</i> service for
           your business
         </h2>
-        <label className="input input-bordered flex items-center pr-0 gap-2 w-full">
-          <CiSearch className="w-6 h-6 opacity-70 text-gray-400" />
-          <input
-            type="text "
-            className="grow text-gray-500"
-            placeholder="Try`building a mobile app`"
-          />
-          <button className="bg-green-500 btn text-white">Search</button>
-        </label>
-        <div className="flex gap-x-2 w-full items-center">
+        <div className="flex flex-col gap-y-2 justify-center w-full">
+          <label className="input input-bordered flex items-center pr-0 gap-2 w-full">
+            <CiSearch className="w-6 h-6 opacity-70 text-gray-400" />
+            <input
+              type="text "
+              className="grow text-gray-500"
+              placeholder="Try`building a mobile app`"
+            />
+            <button className="bg-green-500 btn  hidden lg:block text-white">
+              Search
+            </button>
+          </label>
+          <button className="btn btn-success lg:hidden text-white">Search</button>
+        </div>
+        <div className="flex gap-x-2 w-full items-center flex-wrap gap-3">
           popular :
           <button className="btn rounded-full btn-sm btn-outline btn-ghost text-white">
             Web design
@@ -94,7 +99,7 @@ export default function Header() {
           </button>
         </div>
       </div>
-      <div className="flex-1 w-full h-full relative duration-300">
+      <div className="lg:flex-1 hidden lg:block w-full h-full relative duration-300">
         <div
           className={`absolute bottom-0 w-full h-full duration-300 bg-center ${data[currentIndex].img} bg-no-repeat bg-contain`}
         />

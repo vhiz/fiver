@@ -9,7 +9,7 @@ export default function Slider({ children, h2, breakPoints }) {
   const nextRef = useRef(null);
   return (
     <div className="my-20 p-3 relative">
-      <h2 className="mb-4 font-semibold text-3xl text-gray-500">{h2}</h2>
+      <h2 className="mb-4 font-semibold text-2xl lg:text-3xl text-gray-500">{h2}</h2>
       <Swiper
         breakpoints={{
           ...breakPoints,
@@ -24,7 +24,7 @@ export default function Slider({ children, h2, breakPoints }) {
       >
         {children}
       </Swiper>
-      <div className="absolute top-[50%] left-0 p-3 flex justify-between w-full z-10 h-0">
+      <div className="absolute hidden xl:flex top-[50%] left-0 p-3  justify-between w-full z-10 h-0">
         <button ref={prevRef} className="btn btn-circle ">
           <FaArrowLeftLong />
         </button>

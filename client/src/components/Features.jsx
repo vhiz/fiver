@@ -11,8 +11,8 @@ export default function Features() {
     setVideo("/video/first.mp4");
   }
   return (
-    <div className="p-3 flex w-full gap-14">
-      <div className="flex-[1.5]">
+    <div className="p-3 flex flex-col lg:flex-row w-full gap-14">
+      <div className="lg:flex-[1.5]">
         <h2 className="font-bold font-serif mb-3 text-3xl">
           A whole world of freelance talent at your fingertips
         </h2>
@@ -57,18 +57,18 @@ export default function Features() {
           </span>
         </div>
       </div>
-      <div className="flex-[2] flex items-center justify-center">
-        <div className="relative h-[50vh] w-[85%] overflow-hidden rounded-md">
+      <div className="lg:flex-[2] flex items-center justify-center">
+        <div
+          className="relative h-[50vh] w-[90vw] lg:w-[85%] overflow-hidden rounded-md group duration-300"
+          onClick={handleVideo}
+        >
           <img
             src="/freelance1.jpg"
             alt=""
             className="absolute h-full w-full object-cover"
           />
-          <button
-            className="btn btn-circle bg-black/25 absolute top-[50%] left-[45%] group"
-            onClick={handleVideo}
-          >
-            <FaPlay className="text-white text-xl group-hover:text-black" />
+          <button className="btn btn-circle bg-black/25 absolute top-[50%] left-[45%] group-hover:bg-white/55">
+            <FaPlay className="text-white text-xl group-hover:text-black duration-300" />
           </button>
         </div>
 

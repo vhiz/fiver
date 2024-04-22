@@ -44,7 +44,9 @@ const data = [
 ];
 export default function Categories() {
   const breakPoints = {
-    1024: { slidesPerView: 5, spaceBetween: 30 },
+    1310: { slidesPerView: 5, spaceBetween: 30 },
+    768: { slidesPerView: 2, spaceBetween: 30 },
+    960: { slidesPerView: 3, spaceBetween: 30 },
   };
   return (
     <Slider h2={"Popular Professional Services"} breakPoints={breakPoints}>

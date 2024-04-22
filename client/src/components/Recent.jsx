@@ -3,7 +3,8 @@ import { SwiperSlide } from "swiper/react";
 
 export default function Recent() {
   const breakPoints = {
-    1024: { slidesPerView: 3, spaceBetween: 30 },
+    768: { slidesPerView: 2, spaceBetween: 30 },
+    960: { slidesPerView: 3, spaceBetween: 30 },
   };
   return (
     <Slider

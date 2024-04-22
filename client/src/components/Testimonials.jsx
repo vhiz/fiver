@@ -13,95 +13,64 @@ export default function Testimonials() {
     document.getElementById("videoModal").showModal();
     setVideo(file);
   }
+  const data = [
+    {
+      name: "Kay Kim",
+      img: "/freelance3.jpg",
+      logo: "/logo1.png",
+      desc: `"It's extremely exciting that Fiverr has freelancers from all over the world - it broadens the talent pool. One of the best things about Fiverr is that while we're sleeping someone is working"`,
+      video: "/video/second.mp4",
+    },
+    {
+      name: "Kay Kim",
+      img: "/freelance1.jpg",
+      logo: "/logo2.png",
+      desc: `"When you wan to create your business bigger than yourself, you need a lot of help. That's what Fiverr does."`,
+      video: "/video/third.mp4",
+    },
+    {
+      name: "Brighid Gannon (DNP,PMHNP-BC), Co-Founder",
+      img: "/freelance2.jpg",
+      logo: "/logo1.png",
+      desc: `"We Use Fiver fro SEO, our logo, website, copy, animated videos-literally everything. it was like working with a human right next to you versus being across the world"`,
+      video: "/video/first.mp4",
+    },
+  ];
   return (
     <Slider breakPoints={breakPoints}>
-      <SwiperSlide>
-        <div className="flex gap-x-12 h-[43vh]">
-          <div className="flex-[1.3]">
-            <div className="relative w-full h-full overflow-hidden rounded-md">
-              <img
-                src="/freelance3.jpg"
-                alt=""
-                className="absolute w-full h-full object-cover"
-              />
-              <button
-                className="btn btn-circle bg-black/25 absolute top-[50%] left-[45%] group"
-                onClick={() => handleVideo("/video/second.mp4")}
+      {data.map((item, i) => (
+        <SwiperSlide key={i}>
+          <div className="flex flex-col lg:flex-row gap-x-12 lg:h-[43vh] p-3">
+            <div className="lg:flex-[1.3] h-[50vh] lg:h-full w-full">
+              <div
+                className="relative w-full h-full overflow-hidden rounded-md"
+                onClick={() => handleVideo(item.video)}
               >
-                <FaPlay className="text-white text-xl group-hover:text-black" />
-              </button>
+                <img
+                  src={item.img}
+                  alt=""
+                  className="absolute w-full h-full object-cover"
+                />
+                <button className="btn btn-circle bg-black/25 absolute top-[50%] left-[45%] group">
+                  <FaPlay className="text-white text-xl group-hover:text-black" />
+                </button>
+              </div>
+            </div>
+            <div className="lg:flex-[2] flex mt-3 lg:mt-0 flex-col justify-center h-full">
+              <div className="flex w-full items-center">
+                <span className="text-xl text-gray-500">
+                  {item.name}, Co-Founder
+                </span>
+                <div className="divider divider-horizontal" />
+                <img src={item.logo} alt="" className="w-[10vw]" />
+              </div>
+              <div className="mt-3 text-2xl lg:text-4xl font-semibold font-mono">
+                {item.desc}
+              </div>
             </div>
           </div>
-          <div className="flex-[2] flex flex-col justify-center h-full">
-            <div className="flex w-full items-center">
-              <span className="text-xl text-gray-500">Kay Kim, Co-Founder</span>
-              <div className="divider divider-horizontal" />
-              <img src="/logo1.png" alt="" className="w-[10vw]" />
-            </div>
-            <div className="mt-3 text-4xl font-semibold font-mono">
-                {`"It's extremely exciting that Fiverr has freelancers from all over the world - it broadens the talent pool. One of the best things about Fiverr is that while we're sleeping someone is working"`}
-            </div>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="flex gap-x-12 h-[43vh]">
-          <div className="flex-[1.3]">
-            <div className="relative w-full h-full overflow-hidden rounded-md">
-              <img
-                src="/freelance1.jpg"
-                alt=""
-                className="absolute w-full h-full object-cover"
-              />
-              <button
-                className="btn btn-circle bg-black/25 absolute top-[50%] left-[45%] group"
-                onClick={() => handleVideo("/video/third.mp4")}
-              >
-                <FaPlay className="text-white text-xl group-hover:text-black" />
-              </button>
-            </div>
-          </div>
-          <div className="flex-[2] flex flex-col justify-center h-full">
-            <div className="flex w-full items-center">
-              <span className="text-xl text-gray-500">Tim and Dan Joo, Co-Founder</span>
-              <div className="divider divider-horizontal" />
-              <img src="/logo2.png" alt="" className="w-[10vw]" />
-            </div>
-            <div className="mt-3 text-4xl font-semibold font-mono">
-                {`"When you wan to create your business bigger than yourself, you need a lot of help. That's what Fiverr does."`}
-            </div>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="flex gap-x-12 h-[43vh]">
-          <div className="flex-[1.3]">
-            <div className="relative w-full h-full overflow-hidden rounded-md">
-              <img
-                src="/freelance2.jpg"
-                alt=""
-                className="absolute w-full h-full object-cover"
-              />
-              <button
-                className="btn btn-circle bg-black/25 absolute top-[50%] left-[45%] group"
-                onClick={() => handleVideo("/video/first.mp4")}
-              >
-                <FaPlay className="text-white text-xl group-hover:text-black" />
-              </button>
-            </div>
-          </div>
-          <div className="flex-[2] flex flex-col justify-center h-full">
-            <div className="flex w-full items-center">
-              <span className="text-xl text-gray-500">Brighid Gannon (DNP,PMHNP-BC), Co-Founder</span>
-              <div className="divider divider-horizontal" />
-              <img src="/logo2.png" alt="" className="w-[10vw]" />
-            </div>
-            <div className="mt-3 text-4xl font-semibold font-mono">
-                {`"We Use Fiver fro SEO, our logo, website, copy, animated videos-literally everything. it was like working with a human right next to you versus being across the world"`}
-            </div>
-          </div>
-        </div>
-      </SwiperSlide>
+        </SwiperSlide>
+      ))}
     </Slider>
   );
 }

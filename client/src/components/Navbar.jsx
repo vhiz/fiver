@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { Link, useLocation } from "react-router-dom";
-
+import { IoMenu } from "react-icons/io5";
 export default function Navbar() {
   const [active, setActive] = useState(false);
-  const user = null;
+  const user = true;
   function isActive() {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   }
@@ -19,22 +19,42 @@ export default function Navbar() {
     <div
       className={`${
         pathname === "/" ? "fixed" : "sticky"
-      } z-50 top-0 left-0 w-screen flex flex-col duration-300 `}
+      } z-50 top-0 left-0 bg-white md:bg-transparent w-screen flex flex-col duration-300 `}
     >
       <div
         className={`flex w-full justify-between h-[10vh] duration-300 p-3 ${
           active || pathname !== "/"
-            ? "bg-base-100 text-black"
-            : "bg-transparent text-white"
+            ? "md:bg-base-100 md:text-black"
+            : "md:bg-transparent md:text-white"
         }`}
       >
-        <div className="text-3xl flex font-semibold font-mono gap-x-5">
-          <Link to={'/'} className="btn btn-ghost text-3xl font-semibold font-mono">
+        <div className="flex">
+          <label
+            htmlFor="my-drawer"
+            className="flex btn btn-ghost btn-circle items-center justify-center lg:hidden"
+          >
+            <IoMenu />
+          </label>
+          <Link
+            to={"/"}
+            className="btn hidden md:flex btn-ghost text-3xl font-semibold font-mono"
+          >
+            Fiverr<span className="text-green-400">.</span>
+          </Link>
+        </div>
+
+        <div className="text-3xl flex  font-semibold font-mono gap-x-5">
+          <Link
+            to={"/"}
+            className="btn btn-ghost text-3xl font-semibold font-mono md:hidden"
+          >
             Fiverr<span className="text-green-400">.</span>
           </Link>
           <label
-            className={`input input-bordered flex items-center pr-0 gap-2 w-[30vw] ${
-              active || pathname !== "/" ? "animate-flipInX" : "animate-flipOutX"
+            className={`w-full hidden md:flex input input-bordered items-center pr-0 gap-2 lg:w-[30vw] ${
+              active || pathname !== "/"
+                ? "animate-flipInX"
+                : "animate-flipOutX"
             }`}
           >
             <CiSearch className="w-6 h-6 opacity-70 text-gray-400" />
@@ -43,18 +63,29 @@ export default function Navbar() {
               className="grow text-gray-500"
               placeholder="What are you looking for"
             />
-            <button className="bg-green-500 btn text-white">Search</button>
+            <button className="bg-green-500 hidden lg:block btn text-white">
+              Search
+            </button>
           </label>
         </div>
         <div className="flex px-3">
-          <button className="btn btn-ghost">Fiverr Business</button>
-          <button className="btn btn-ghost">Explore</button>
-          <button className="btn btn-ghost">English</button>
-          <button className="btn btn-ghost">Become a seller</button>
+          <div className="hidden lg:flex">
+            <button className="btn btn-ghost">Fiverr Business</button>
+            <button className="btn btn-ghost">Explore</button>
+            <button className="btn btn-ghost">Become a seller</button>
+          </div>
           {!user ? (
             <div className="flex gap-x-3">
-              <button className="btn btn-ghost">Sign in</button>
-              <button className={`btn btn-ghost btn-outline btn-success ${ active || pathname !== "/"?'border-green-400 text-green-400':'border-white text-white'}`}>Join</button>
+              <button className="hidden md:block btn btn-ghost">Sign in</button>
+              <button
+                className={`btn btn-ghost md:btn-outline text-green-400 btn-success ${
+                  active || pathname !== "/"
+                    ? "md:border-green-400 text-green-400"
+                    : "md:border-white md:text-white"
+                }`}
+              >
+                Join
+              </button>
             </div>
           ) : (
             <div className="dropdown dropdown-end">
@@ -63,11 +94,10 @@ export default function Navbar() {
                 role="button"
                 className="btn btn-ghost btn-circle avatar"
               >
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                  />
+                <div className="avatar">
+                  <div className="w-12 mask mask-hexagon">
+                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                  </div>
                 </div>
               </div>
               <ul
@@ -77,7 +107,7 @@ export default function Navbar() {
                 {user?.isSeller && (
                   <>
                     <li>
-                      <Link to={'/gigs'}>Gig</Link>
+                      <Link to={"/gigs"}>Gig</Link>
                     </li>
                     <li>
                       <Link>Add new Gig</Link>
@@ -99,7 +129,7 @@ export default function Navbar() {
         </div>
       </div>
       <div
-        className={`px-3 flex justify-between border-y border-gray-300 bg-white ${
+        className={`px-3 hidden lg:flex justify-between border-y border-gray-300 bg-white ${
           active || pathname !== "/" ? "animate-flipInX" : "animate-flipOutX"
         }`}
       >
