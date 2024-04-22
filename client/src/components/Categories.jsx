@@ -7,41 +7,49 @@ const data = [
     id: 1,
     title: "Ai Services",
     img: "/ai.jpg",
+    cat: "ai",
   },
   {
     id: 1,
     title: "Animation",
+    cat: "animation",
     img: "/animation.jpg",
   },
   {
     id: 1,
     title: "Data Entry",
     img: "/data.jpg",
+    cat: "data entry",
   },
   {
     id: 1,
     title: "Illustration",
     img: "/illustration.jpg",
+    cat: "illustration",
   },
   {
     id: 1,
     title: "Programming & Tech",
     img: "/programming.jpg",
+    cat: "programming & tech",
   },
   {
     id: 1,
     title: "SEO",
     img: "/seo.jpg",
+    cat: "SEO",
   },
   {
     id: 1,
     title: "Social",
     img: "/social.jpg",
+    cat: "social",
   },
   {
     id: 1,
     title: "Translation",
     img: "/translation.jpg",
+    cat: "translation",
   },
 ];
 export default function Categories() {
@@ -55,7 +63,7 @@ export default function Categories() {
       {data.map((item, i) => (
         <SwiperSlide key={i}>
           <Link
-            to={"/gigs?cat=animation"}
+            to={`/gigs?cat=${item.cat}`}
             className="w-full h-[50vh] relative rounded-md overflow-hidden bg-red-300 btn"
           >
             <div className="absolute z-10 text-white top-0 left-0 w-full h-full bg-gradient-to-b from-black/50 to-white/5 p-2">

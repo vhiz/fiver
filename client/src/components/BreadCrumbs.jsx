@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function BreadCrumbs() {
+export default function BreadCrumbs({page}) {
   return (
     <div className="text-sm breadcrumbs">
       <ul>
@@ -9,7 +9,7 @@ export default function BreadCrumbs() {
             <Link to={"/"}>Home</Link>
           </a>
         </li>
-        <li>Animations</li>
+        <li className="capitalize">{page}</li>
       </ul>
     </div>
   );
