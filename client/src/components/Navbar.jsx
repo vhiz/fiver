@@ -107,7 +107,7 @@ export default function Navbar() {
                 {user?.isSeller && (
                   <>
                     <li>
-                      <Link to={"/gigs"}>Gig</Link>
+                      <Link to={"/gig"}>Gig</Link>
                     </li>
                     <li>
                       <Link>Add new Gig</Link>
