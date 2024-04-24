@@ -31,7 +31,7 @@ export default function Review() {
           yes <FaRegThumbsUp />{" "}
         </button>
         <button className="btn btn-ghost btn-sm">
-          yes <FaRegThumbsDown />{" "}
+          no <FaRegThumbsDown />{" "}
         </button>
       </div>
     </div>
