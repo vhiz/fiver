@@ -9,7 +9,7 @@ export default function Slider({ children, h2, breakPoints }) {
   const nextRef = useRef(null);
   return (
     <div className="my-20 p-3 relative">
-      <h2 className="mb-4 font-semibold text-2xl lg:text-3xl text-gray-500">{h2}</h2>
+      <h2 className="mb-4 font-semibold text-2xl lg:text-3xl text-gray-400">{h2}</h2>
       <Swiper
         breakpoints={{
           ...breakPoints,

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function BreadCrumbs({page}) {
+export default function BreadCrumbs({ page, cat }) {
   return (
     <div className="text-sm breadcrumbs">
       <ul>
@@ -9,7 +9,17 @@ export default function BreadCrumbs({page}) {
             <Link to={"/"}>Home</Link>
           </a>
         </li>
-        <li className="capitalize">{page}</li>
+        {cat && (
+          <li>
+            <a>
+              <Link to={`/gigs?cat=${cat}`} className="capitalize">
+                {cat}
+              </Link>
+              <span className="mx-2 opacity-75">{">"}</span>
+            </a>
+          </li>
+        )}
+        <li className="capitalize font-semibold">{page}</li>
       </ul>
     </div>
   );

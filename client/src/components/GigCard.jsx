@@ -28,7 +28,7 @@ export default function GigCard() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident at
           voluptatum voluptate
         </span>
-        <div className="border-t border-gray-200 w-full flex items-center justify-between">
+        <div className="border-t input-bordered w-full flex items-center justify-between">
           <div className="btn btn-sm btn-ghost">
             <FaHeart className="text-red-500" />
           </div>

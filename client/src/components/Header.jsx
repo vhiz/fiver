@@ -74,7 +74,7 @@ export default function Header() {
             <CiSearch className="w-6 h-6 opacity-70 text-gray-400" />
             <input
               type="text "
-              className="grow text-gray-500"
+              className="grow text-gray-400"
               placeholder="Try`building a mobile app`"
             />
             <button className="bg-green-500 btn  hidden lg:block text-white">

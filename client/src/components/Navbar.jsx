@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { Link, useLocation } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
+import Toggle from "./Toggle";
 export default function Navbar() {
   const [active, setActive] = useState(false);
   const user = true;
@@ -19,12 +20,12 @@ export default function Navbar() {
     <div
       className={`${
         pathname === "/" ? "fixed" : "sticky"
-      } z-50 top-0 left-0 bg-white md:bg-transparent w-screen flex flex-col duration-300 `}
+      } z-50 top-0 left-0 bg-base-100 md:bg-transparent w-screen flex flex-col duration-300 `}
     >
       <div
         className={`flex w-full justify-between h-[10vh] duration-300 p-3 ${
           active || pathname !== "/"
-            ? "md:bg-base-100 md:text-black"
+            ? "md:bg-base-100 md:text-gray-400"
             : "md:bg-transparent md:text-white"
         }`}
       >
@@ -60,7 +61,7 @@ export default function Navbar() {
             <CiSearch className="w-6 h-6 opacity-70 text-gray-400" />
             <input
               type="text "
-              className="grow text-gray-500"
+              className="grow text-gray-400"
               placeholder="What are you looking for"
             />
             <button className="bg-green-500 hidden lg:block btn text-white">
@@ -74,6 +75,7 @@ export default function Navbar() {
             <button className="btn btn-ghost">Explore</button>
             <button className="btn btn-ghost">Become a seller</button>
           </div>
+          <Toggle />
           {!user ? (
             <div className="flex gap-x-3">
               <button className="hidden md:block btn btn-ghost">Sign in</button>
@@ -129,7 +131,7 @@ export default function Navbar() {
         </div>
       </div>
       <div
-        className={`px-3 hidden lg:flex justify-between border-y border-gray-300 bg-white ${
+        className={`px-3 hidden lg:flex justify-between border-y input-bordered bg-base-100 ${
           active || pathname !== "/" ? "animate-flipInX" : "animate-flipOutX"
         }`}
       >
