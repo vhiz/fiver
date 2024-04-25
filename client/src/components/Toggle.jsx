@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { GoMoon, GoSun } from "react-icons/go";
 
 export default function Toggle() {
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
   const [isDark, setIsDark] = useState(
-    JSON.parse(localStorage.getItem("isDark")) || "bumblebee"
+    JSON.parse(localStorage.getItem("isDark")) || mediaQuery.matches
+      ? "business"
+      : "bumblebee"
   );
 
   useEffect(() => {

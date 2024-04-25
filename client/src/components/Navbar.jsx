@@ -5,7 +5,9 @@ import { IoMenu } from "react-icons/io5";
 import Toggle from "./Toggle";
 export default function Navbar() {
   const [active, setActive] = useState(false);
-  const user = true;
+  const user = {
+    isSeller: true,
+  };
   function isActive() {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   }
@@ -109,15 +111,12 @@ export default function Navbar() {
                 {user?.isSeller && (
                   <>
                     <li>
-                      <Link to={"/gig"}>Gig</Link>
-                    </li>
-                    <li>
-                      <Link>Add new Gig</Link>
+                      <Link to={"/mygigs"}>Gigs</Link>
                     </li>
                   </>
                 )}
                 <li>
-                  <Link>Orders</Link>
+                  <Link to={"/orders"}>Orders</Link>
                 </li>
                 <li>
                   <Link>Messages</Link>
