@@ -119,7 +119,7 @@ export default function Navbar() {
                   <Link to={"/orders"}>Orders</Link>
                 </li>
                 <li>
-                  <Link>Messages</Link>
+                  <Link to={'/messages'}>Messages</Link>
                 </li>
                 <li>
                   <Link>Logout</Link>

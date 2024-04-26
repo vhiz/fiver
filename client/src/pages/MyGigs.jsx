@@ -149,7 +149,12 @@ export default function MyGigs() {
             </tr>
           </tfoot>
         </table>
-      <AddGig />
+        <dialog id="addGig" className="modal">
+          <AddGig />
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
       </div>
     </div>
   );

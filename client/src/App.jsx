@@ -6,6 +6,7 @@ import Gigs from "./pages/Gigs";
 import Gig from "./pages/Gig";
 import MyGigs from "./pages/MyGigs";
 import Orders from "./pages/Orders";
+import Messages from "./pages/Messages";
 export default function App() {
   const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ export default function App() {
         {
           path: "/orders",
           element: <Orders />,
+        },
+        {
+          path: "/messages",
+          element: <Messages />,
         },
       ],
     },
