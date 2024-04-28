@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import "swiper/css";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
@@ -7,7 +11,11 @@ import Gig from "./pages/Gig";
 import MyGigs from "./pages/MyGigs";
 import Orders from "./pages/Orders";
 import Messages from "./pages/Messages";
+import useUserStore from "./useStore/useUserStore";
+
 export default function App() {
+  const { currentUser } = useUserStore();
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -25,6 +33,12 @@ export default function App() {
           path: "/gig/:id",
           element: <Gig />,
         },
+      ],
+    },
+    {
+      path: "/",
+      element: !currentUser ? <Navigate to={"/"} /> : <Layout />,
+      children: [
         {
           path: "/mygigs",
           element: <MyGigs />,

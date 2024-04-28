@@ -5,3 +5,8 @@
 * {
   @apply box-border;
 }
+
+.PhoneInputInput {
+  @apply input input-bordered w-full;
+}
+

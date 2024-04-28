@@ -3,11 +3,13 @@ import { CiSearch } from "react-icons/ci";
 import { Link, useLocation } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import Toggle from "./Toggle";
+import useUserStore from "../useStore/useUserStore";
+import toast from "react-hot-toast";
+import apiRequest from "../lib/axios";
+
 export default function Navbar() {
   const [active, setActive] = useState(false);
-  const user = {
-    isSeller: true,
-  };
+  const { currentUser, setCurrentUser } = useUserStore();
   function isActive() {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   }
@@ -18,6 +20,15 @@ export default function Navbar() {
     };
   }, []);
   const { pathname } = useLocation();
+
+  async function handleLogout() {
+    try {
+      await apiRequest.post("/auth/logout");
+      setCurrentUser(null);
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  }
   return (
     <div
       className={`${
@@ -75,18 +86,39 @@ export default function Navbar() {
           <div className="hidden lg:flex">
             <button className="btn btn-ghost">Fiverr Business</button>
             <button className="btn btn-ghost">Explore</button>
-            <button className="btn btn-ghost">Become a seller</button>
+            <button
+              className="btn btn-ghost"
+              onClick={() => {
+                if (!currentUser) {
+                  document.getElementById("loginModal").showModal();
+                  return;
+                }
+                document.getElementById("sellerModal").showModal();
+              }}
+            >
+              Become a seller
+            </button>
           </div>
           <Toggle />
-          {!user ? (
+          {!currentUser ? (
             <div className="flex gap-x-3">
-              <button className="hidden md:block btn btn-ghost">Sign in</button>
+              <button
+                className="hidden md:block btn btn-ghost"
+                onClick={() =>
+                  document.getElementById("loginModal").showModal()
+                }
+              >
+                Sign in
+              </button>
               <button
                 className={`btn btn-ghost md:btn-outline text-green-400 btn-success ${
                   active || pathname !== "/"
                     ? "md:border-green-400 text-green-400"
                     : "md:border-white md:text-white"
                 }`}
+                onClick={() =>
+                  document.getElementById("registerModal").showModal()
+                }
               >
                 Join
               </button>
@@ -100,7 +132,7 @@ export default function Navbar() {
               >
                 <div className="avatar">
                   <div className="w-12 mask mask-hexagon">
-                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    <img src={currentUser.img} />
                   </div>
                 </div>
               </div>
@@ -108,7 +140,7 @@ export default function Navbar() {
                 tabIndex={0}
                 className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 text-gray-500 rounded-box w-52"
               >
-                {user?.isSeller && (
+                {currentUser?.isSeller && (
                   <>
                     <li>
                       <Link to={"/mygigs"}>Gigs</Link>
@@ -119,10 +151,10 @@ export default function Navbar() {
                   <Link to={"/orders"}>Orders</Link>
                 </li>
                 <li>
-                  <Link to={'/messages'}>Messages</Link>
+                  <Link to={"/messages"}>Messages</Link>
                 </li>
                 <li>
-                  <Link>Logout</Link>
+                  <button onClick={handleLogout}>Logout</button>
                 </li>
               </ul>
             </div>
