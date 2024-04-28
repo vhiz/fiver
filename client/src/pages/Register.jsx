@@ -43,6 +43,11 @@ export default function Register() {
   }
   return (
     <div className="modal-box w-[100vw] max-w-[100vw] lg:max-w-[70vw] max-h-[100vh] lg:h-[calc(100vh-5rem)] flex p-0 rounded-lg">
+      <form method="dialog" className="lg:hidden">
+        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          ✕
+        </button>
+      </form>
       <div className="hidden lg:block lg:flex-1 sticky top-0 h-full">
         <div className="w-full h-full text-white relative">
           <img

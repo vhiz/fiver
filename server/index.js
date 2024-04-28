@@ -5,14 +5,16 @@ import cors from "cors";
 const app = express();
 
 import authRoute from "./routes/authRoute.js";
+import userRoute from "./routes/userRoute.js";
 
-app.use(express.json());
 
-app.use(cors({ origin: ["http://localhost:5173"], credentials: true })); //
 app.use(helmet());
 app.use(cookieParser());
+app.use(cors({ origin: ["http://localhost:5173"], credentials: true }));
+app.use(express.json());
 
 app.use("/api/auth", authRoute);
+app.use("/api/user", userRoute);
 
 app.use("*", (req, res) => {
   return res.status(404).json("Not found");

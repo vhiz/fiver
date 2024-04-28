@@ -7,13 +7,17 @@ import Register from "../pages/Register";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import Seller from "./Seller";
+import useUserStore from "../useStore/useUserStore";
 
 export default function Layout() {
+  const { currentUser } = useUserStore();
+
   useEffect(() => {
+    if (currentUser) return;
     setTimeout(() => {
       document.getElementById("registerModal").showModal();
     }, 5000);
-  }, []);
+  }, [currentUser]);
   return (
     <div className="drawer">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />

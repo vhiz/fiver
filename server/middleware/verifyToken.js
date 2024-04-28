@@ -2,8 +2,7 @@ import jwt from "jsonwebtoken";
 
 export function verifyToken(req, res, next) {
   const token = req.cookies.fiverrClone;
-  if (!token) return res.status(401).json("Not Authorized");
-
+  if (!token) return res.status(401).json("No token found");
   jwt.verify(token, process.env.TOKEN, (err, payload) => {
     if (err) return res.status(401).json("Token Not valid");
 

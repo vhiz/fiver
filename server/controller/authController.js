@@ -83,7 +83,6 @@ export async function Login(req, res) {
     return res
       .cookie("fiverrClone", token, {
         httpOnly: true,
-        sameSite: "none",
         secure: process.env.NODE_ENV === "production",
         maxAge: 24 * 60 * 60 * 1000,
       })
@@ -97,12 +96,7 @@ export async function Login(req, res) {
 
 export async function Logout(req, res) {
   try {
-    return res
-      .clearCookie("fiverrClone", {
-        sameSite: "none",
-      })
-      .status(204)
-      .end();
+    return res.clearCookie("fiverrClone").status(204).end();
   } catch (error) {
     console.log(error);
     res.status(400).json(error);

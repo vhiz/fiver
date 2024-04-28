@@ -27,6 +27,11 @@ export default function Login() {
 
   return (
     <div className="modal-box w-[100vw] max-w-[100vw] lg:max-w-[70vw] max-h-[100vh] lg:h-[calc(100vh-5rem)] flex p-0 rounded-lg">
+      <form method="dialog" className="lg:hidden">
+        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+          ✕
+        </button>
+      </form>
       <div className="hidden lg:block lg:flex-1 text-white relative">
         <img
           src="https://images.unsplash.com/photo-1701551883642-67a960663758?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
