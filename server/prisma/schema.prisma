@@ -31,6 +31,7 @@ model User {
   Conversation   Conversation? @relation(fields: [conversationId], references: [id])
   conversationId String?       @db.ObjectId
   Message        Message[]
+  Liked          Liked[]
 }
 
 model Gig {
@@ -53,6 +54,7 @@ model Gig {
   createdAt      DateTime @default(now())
   Review         Review[]
   Order          Order[]
+  Liked          Liked[]
 }
 
 enum Cat {
@@ -64,6 +66,20 @@ enum Cat {
   Seo
   social
   ai
+  illustration
+  programming
+  translation
+}
+
+model Liked {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @db.ObjectId
+  gig       Gig      @relation(fields: [gigId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  gigId     String   @db.ObjectId
+
+  @@unique([userId, gigId])
 }
 
 model Review {

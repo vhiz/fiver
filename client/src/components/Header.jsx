@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import { Link, useNavigate } from "react-router-dom";
+
 export default function Header() {
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const data = [
     {
       id: 1,
@@ -52,6 +55,8 @@ export default function Header() {
       title: "Fashion Designer",
     },
   ];
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     const interval = setInterval(() => {
       const randomIndex = Math.floor(Math.random() * data.length);
@@ -60,6 +65,11 @@ export default function Header() {
 
     return () => clearInterval(interval);
   }, [data.length]);
+
+  function handleSearch(e) {
+    e.preventDefault();
+    navigate(`/gigs?desc=${query}`);
+  }
   return (
     <div
       className={`w-full h-screen duration-300 ${data[currentIndex].color} text-white flex items-center justify-center px-4`}
@@ -69,34 +79,54 @@ export default function Header() {
           Find the perfect <i className="font-thin">freelance</i> service for
           your business
         </h2>
-        <div className="flex flex-col gap-y-2 justify-center w-full">
+        <form
+          className="flex flex-col gap-y-2 justify-center w-full"
+          onSubmit={handleSearch}
+        >
           <label className="input input-bordered flex items-center pr-0 gap-2 w-full">
             <CiSearch className="w-6 h-6 opacity-70 text-gray-400" />
             <input
               type="text "
               className="grow text-gray-400"
               placeholder="Try`building a mobile app`"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              required
             />
             <button className="bg-green-500 btn  hidden lg:block text-white">
               Search
             </button>
           </label>
-          <button className="btn btn-success lg:hidden text-white">Search</button>
-        </div>
+          <button className="btn btn-success lg:hidden text-white">
+            Search
+          </button>
+        </form>
         <div className="flex gap-x-2 w-full items-center flex-wrap gap-3">
           popular :
-          <button className="btn rounded-full btn-sm btn-outline btn-ghost text-white">
+          <Link
+            to={`/gigs?desc=web design`}
+            className="btn rounded-full btn-sm btn-outline btn-ghost text-white"
+          >
             Web design
-          </button>
-          <button className="btn rounded-full btn-sm btn-outline btn-ghost text-white">
+          </Link>
+          <Link
+            to={`/gigs?desc=wordPress`}
+            className="btn rounded-full btn-sm btn-outline btn-ghost text-white"
+          >
             WordPress
-          </button>
-          <button className="btn rounded-full btn-sm btn-outline btn-ghost text-white">
+          </Link>
+          <Link
+            to={`/gigs?desc=logo design`}
+            className="btn rounded-full btn-sm btn-outline btn-ghost text-white"
+          >
             Logo Design
-          </button>
-          <button className="btn rounded-full btn-sm btn-outline btn-ghost text-white">
+          </Link>
+          <Link
+            to={`/gigs?desc=ai service`}
+            className="btn rounded-full btn-sm btn-outline btn-ghost text-white"
+          >
             Ai Service
-          </button>
+          </Link>
         </div>
       </div>
       <div className="lg:flex-1 hidden lg:block w-full h-full relative duration-300">

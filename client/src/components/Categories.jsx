@@ -19,7 +19,7 @@ const data = [
     id: 1,
     title: "Data Entry",
     img: "/data.jpg",
-    cat: "data entry",
+    cat: "dataEntry",
   },
   {
     id: 1,
@@ -31,13 +31,13 @@ const data = [
     id: 1,
     title: "Programming & Tech",
     img: "/programming.jpg",
-    cat: "programming & tech",
+    cat: "programming",
   },
   {
     id: 1,
     title: "SEO",
     img: "/seo.jpg",
-    cat: "SEO",
+    cat: "Seo",
   },
   {
     id: 1,
@@ -54,7 +54,7 @@ const data = [
     id: 1,
     title: "Music",
     img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    cat: "Music",
+    cat: "music",
   },
 ];
 export default function Categories() {

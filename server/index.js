@@ -6,7 +6,7 @@ const app = express();
 
 import authRoute from "./routes/authRoute.js";
 import userRoute from "./routes/userRoute.js";
-
+import gigRoute from "./routes/gigRoute.js";
 
 app.use(helmet());
 app.use(cookieParser());
@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
+app.use("/api/gig", gigRoute);
 
 app.use("*", (req, res) => {
   return res.status(404).json("Not found");

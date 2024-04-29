@@ -1,68 +1,78 @@
-import { FaStar } from "react-icons/fa";
 import Slider from "../Slider";
 import { SwiperSlide } from "swiper/react";
 import Review from "./Review";
 import CheckOut from "./CheckOut";
+import StarRating from "../StarRating";
+import ReviewInput from "../ReviewInput";
+import useUserStore from "../../useStore/useUserStore";
+import { useEffect } from "react";
+import useReviewStore from "../../useStore/useReviewStore";
 
-export default function Head() {
+export default function Head({ gig }) {
+  const { currentUser } = useUserStore();
+  const { setReview, review } = useReviewStore();
   const breakPoints = {
     960: { slidesPerView: 1, spaceBetween: 30 },
   };
+
+  useEffect(() => {
+    setReview(gig.Review);
+  }, [gig]);
+  const getTotalStarsAndStarNumber = (gigs) => {
+    const starsAndNumbers = gigs.map((gig) => ({
+      totalStars: gig.totalStars,
+      starNumber: gig.starNumber,
+    }));
+
+    const { totalStars, totalStarNumber } = starsAndNumbers.reduce(
+      (accumulator, currentValue) => ({
+        totalStars: accumulator.totalStars + currentValue.totalStars,
+        totalStarNumber: accumulator.totalStarNumber + currentValue.starNumber,
+      }),
+      { totalStars: 0, totalStarNumber: 0 }
+    );
+
+    return { totalStars, totalStarNumber };
+  };
+  const { totalStars, totalStarNumber } = getTotalStarsAndStarNumber(
+    gig?.user?.Gig
+  );
   return (
     <div className="my-4 flex flex-col gap-4 w-full">
       <h2 className="lg:text-2xl text-lg font-semibold capitalize opacity-90">
-        quarter how curve birthday machinery throw time baby
+        {gig?.title}
       </h2>
       <div className="flex items-center gap-x-2">
         <div className="avatar">
           <div className="lg:w-10 w-7 mask mask-squircle">
-            <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            <img src={gig?.user?.img} />
           </div>
         </div>
         <span className="font-semibold">Joe Walsh</span>
-        <div className="flex items-center gap-2">
-          <FaStar className="text-yellow-500" />
-          <FaStar className="text-yellow-500" />
-          <FaStar className="text-yellow-500" />
-          <p>5</p>
-        </div>
+        {!isNaN(gig.totalStars / gig.starNumber) && (
+          <StarRating
+            starNumber={Math.round(gig.totalStars / gig.starNumber)}
+          />
+        )}
       </div>
       <div className="w-full lg:w-[57vw]">
         <Slider breakPoints={breakPoints} margin={"5"}>
-          {Array(4)
-            .fill()
-            .map((item, i) => (
-              <SwiperSlide key={i}>
-                <div className="lg:h-[65vh] h-[50vh] flex items-center justify-center">
-                  <img
-                    src="https://images.unsplash.com/photo-1713694847163-f9fce967c146?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8"
-                    alt=""
-                    className="h-full min-w-[50%] object-cover max-w-[70%]"
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
+          {gig?.images.map((item, i) => (
+            <SwiperSlide key={i}>
+              <div className="lg:h-[65vh] h-[50vh] flex items-center justify-center">
+                <img
+                  src={item}
+                  alt=""
+                  className="h-full min-w-[50%] object-cover max-w-[70%]"
+                />
+              </div>
+            </SwiperSlide>
+          ))}
         </Slider>
       </div>
       <h2 className="font-semibold text-xl opacity-90">About This Gig</h2>
       <p className="text-justify capitalize mb-8 px-4 opacity-75 text-sm lg:text-base">
-        noon shout snow plates quick seldom came jungle select form who far
-        silver grew add wait present foot pressure attack word medicine memory
-        paint. fewer mighty now coal small disappear hope open crowd receive
-        threw nest voice unit hold title arrange exactly word clothes actual
-        past dark send noon shout snow plates quick seldom came jungle select
-        form who far silver grew add wait present foot pressure attack word
-        medicine memory paint. fewer mighty now coal small disappear hope open
-        crowd receive threw nest voice unit hold title arrange exactly word
-        clothes actual past dark send noon shout snow plates quick seldom came
-        jungle select form who far silver grew add wait present foot pressure
-        attack word medicine memory paint. fewer mighty now coal small disappear
-        hope open crowd receive threw nest voice unit hold title arrange exactly
-        word clothes actual past dark send noon shout snow plates quick seldom
-        came jungle select form who far silver grew add wait present foot
-        pressure attack word medicine memory paint. fewer mighty now coal small
-        disappear hope open crowd receive threw nest voice unit hold title
-        arrange exactly word clothes actual past dark send
+        {gig?.desc}
       </p>
       <div className="lg:hidden">
         <CheckOut />
@@ -73,20 +83,19 @@ export default function Head() {
         <div className="flex items-center gap-x-3">
           <div className="avatar">
             <div className="lg:w-28 w-20 rounded-full">
-              <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              <img src={gig.user.img} />
             </div>
           </div>
           <div className="flex flex-col justify-center gap-y-1">
-            <h3 className="font-semibold text-sm">Douglas Hines</h3>
-            <div className="flex items-center gap-2">
-              <FaStar className="text-yellow-500" />
-              <FaStar className="text-yellow-500" />
-              <FaStar className="text-yellow-500" />
-              <FaStar className="text-yellow-500" />
-              <FaStar className="text-yellow-500" />
-              <p>5</p>
-            </div>
-            <button className="btn btn-outline btn-info btn-sm lg:btn-md">
+            <h3 className="font-semibold text-sm capitalize mb-2">
+              {gig.user?.name}
+            </h3>
+            {!isNaN(totalStars / totalStarNumber) && (
+              <StarRating
+                starNumber={Math.round(totalStars / totalStarNumber)}
+              />
+            )}
+            <button className="btn btn-outline btn-info btn-sm lg:btn-md mt-2">
               Contact Me
             </button>
           </div>
@@ -96,7 +105,7 @@ export default function Head() {
         <div className="h-[75%] p-3 gap-2 flex flex-col flex-wrap">
           <div className="flex flex-col justify-center gap-y-1">
             <h3 className="font-semibold">From</h3>
-            <span className="font-thin">Nigeria</span>
+            <span className="font-thin">{gig?.user?.countryName}</span>
           </div>
           <div className="flex flex-col justify-center gap-y-1">
             <h3 className="font-semibold">Avg response time</h3>
@@ -108,7 +117,7 @@ export default function Head() {
           </div>
           <div className="flex flex-col justify-center gap-y-1">
             <h3 className="font-semibold">Member Since</h3>
-            <span className="font-thin">2022</span>
+            <span className="font-thin">{gig?.user?.createdAt}</span>
           </div>
           <div className="flex flex-col justify-center gap-y-1">
             <h3 className="font-semibold">Last delivery</h3>
@@ -116,27 +125,15 @@ export default function Head() {
           </div>
         </div>
         <div className="border-t input-bordered h-[25%] w-full p-3 text-sm">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim
-          reiciendis amet eligendi. Eligendi adipisci perspiciatis consectetur
-          quia ipsam labore nostrum laboriosam commodi veniam harum ipsa nam,
-          facilis reprehenderit qui rerum?
+          {gig?.user?.desc}
         </div>
       </div>
       <div className="mt-5 flex flex-col gap-y-3">
         <h2 className="text-2xl font-semibold">Reviews</h2>
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
-        <Review />
+        {currentUser && <ReviewInput gig={gig} />}
+        {review.map((review) => (
+          <Review key={review.id} review={review} />
+        ))}
       </div>
     </div>
   );
