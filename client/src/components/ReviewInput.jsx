@@ -3,20 +3,28 @@ import useUserStore from "../useStore/useUserStore";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import apiRequest from "../lib/axios";
+import useReviewStore from "../useStore/useReviewStore";
 
 export default function ReviewInput({ gig }) {
   const { currentUser } = useUserStore();
   const [rating, setRating] = useState(1);
   const [loading, setLoading] = useState(false);
   const [desc, setDesc] = useState("");
+  const { setReview } = useReviewStore();
 
   async function handleSend(e) {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await apiRequest.post();
+      const res = await apiRequest.post("/review", {
+        desc,
+        star: rating,
+        gigId: gig.id,
+      });
+      setReview(res.data);
+      setDesc("");
+      setRating(0);
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong");
     } finally {
       setLoading(false);
@@ -25,7 +33,7 @@ export default function ReviewInput({ gig }) {
   return (
     <form className="w-full flex items-center gap-3" onSubmit={handleSend}>
       <div className="avatar">
-        <div className="lg:w-12 rounded-full">
+        <div className="w-12 rounded-full">
           <img src={currentUser.img} />
         </div>
       </div>
@@ -72,6 +80,8 @@ export default function ReviewInput({ gig }) {
           type="text"
           placeholder="Type here"
           className="input input-bordered w-full"
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
           disabled={gig?.userId === currentUser.id}
         />
       </div>

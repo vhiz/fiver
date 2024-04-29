@@ -4,6 +4,7 @@ import {
   DeleteGig,
   GetGig,
   GetGigs,
+  LikeGig,
 } from "../controller/gigController.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 const router = e.Router();
@@ -12,4 +13,5 @@ router.post("/", verifyToken, CreateGig);
 router.get("/", GetGigs);
 router.get("/single/:id", GetGig);
 router.delete("/:id", verifyToken, DeleteGig);
+router.post("/like", verifyToken, LikeGig);
 export default router;

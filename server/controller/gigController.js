@@ -100,3 +100,33 @@ export async function DeleteGig(req, res) {
     return res.status(500).json("Something went wrong");
   }
 }
+export async function LikeGig(req, res) {
+  const { body, userId } = req;
+  const gigId = body.gigId;
+  try {
+    const like = await prisma.liked.findUnique({
+      where: {
+        userId_gigId: { userId, gigId },
+      },
+    });
+    if (like) {
+      await prisma.liked.delete({
+        where: {
+          id: like.id,
+        },
+      });
+      return res.status(200).json("Removed");
+    } else {
+      await prisma.liked.create({
+        data: {
+          userId,
+          gigId: body.gigId,
+        },
+      });
+      return res.status(201).json("Liked Gig");
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json("Something went wrong");
+  }
+}

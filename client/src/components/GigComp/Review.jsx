@@ -6,7 +6,7 @@ export default function Review({ review }) {
       <div className="flex items-center gap-x-2">
         <div className="avatar">
           <div className="w-12 rounded-full">
-            <img src={review.user.img} />
+            <img src={review?.user.img} />
           </div>
         </div>
         <div className="flex flex-col items-start">
@@ -17,10 +17,11 @@ export default function Review({ review }) {
         </div>
       </div>
       <div className="flex items-center gap-2 text-xs opacity-70">
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <FaStar className="text-yellow-500" />
-        <p>5</p>
+        {Array(review.star)
+          .fill()
+          .map((item, i) => (
+            <FaStar className="text-yellow-500" key={i} />
+          ))}
       </div>
       <p className="text-sm opacity-75 text-justify">{review.desc}</p>
       <div className=" flex gap-x-1 items-center">

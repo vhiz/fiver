@@ -7,6 +7,7 @@ import ReviewInput from "../ReviewInput";
 import useUserStore from "../../useStore/useUserStore";
 import { useEffect } from "react";
 import useReviewStore from "../../useStore/useReviewStore";
+import moment from "moment";
 
 export default function Head({ gig }) {
   const { currentUser } = useUserStore();
@@ -14,10 +15,11 @@ export default function Head({ gig }) {
   const breakPoints = {
     960: { slidesPerView: 1, spaceBetween: 30 },
   };
-
   useEffect(() => {
-    setReview(gig.Review);
-  }, [gig]);
+    if (gig?.Review?.length > 0) {
+      setReview(...gig.Review);
+    }
+  }, []);
   const getTotalStarsAndStarNumber = (gigs) => {
     const starsAndNumbers = gigs.map((gig) => ({
       totalStars: gig.totalStars,
@@ -117,7 +119,9 @@ export default function Head({ gig }) {
           </div>
           <div className="flex flex-col justify-center gap-y-1">
             <h3 className="font-semibold">Member Since</h3>
-            <span className="font-thin">{gig?.user?.createdAt}</span>
+            <span className="font-thin">
+              {moment(gig?.user?.createdAt).format('MMMM YYYY')}
+            </span>
           </div>
           <div className="flex flex-col justify-center gap-y-1">
             <h3 className="font-semibold">Last delivery</h3>
@@ -131,9 +135,11 @@ export default function Head({ gig }) {
       <div className="mt-5 flex flex-col gap-y-3">
         <h2 className="text-2xl font-semibold">Reviews</h2>
         {currentUser && <ReviewInput gig={gig} />}
-        {review.map((review) => (
-          <Review key={review.id} review={review} />
-        ))}
+        {review
+          .sort((a, b) => b.createdAt - a.createdAt)
+          .map((review) => (
+            <Review key={review?.id} review={review} />
+          ))}
       </div>
     </div>
   );
