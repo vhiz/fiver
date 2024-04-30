@@ -21,7 +21,7 @@ export default function GigCard({ gig }) {
           </div>
           <p className="capitalize">{gig.user.name}</p>
         </div>
-        <span className="text-justify">{gig.desc}</span>
+        <span className="text-justify">{gig.shortDesc}</span>
         {!isNaN(gig.totalStars / gig.starNumber) && (
           <StarRating
             starNumber={Math.round(gig.totalStars / gig.starNumber)}

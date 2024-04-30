@@ -93,6 +93,7 @@ export async function GetGig(req, res) {
         },
       },
     });
+    if (!gig) return res.status(404).json("Notfound");
     return res.status(200).json(gig);
   } catch (error) {
     console.log(error);
@@ -101,6 +102,17 @@ export async function GetGig(req, res) {
 }
 export async function DeleteGig(req, res) {
   try {
+    const gigIds = req.body.gigIds;
+    await Promise.all(
+      gigIds.map(async (gigId) => {
+        await prisma.gig.delete({
+          where: {
+            id: gigId,
+          },
+        });
+      })
+    );
+    return res.status(200).json("deleted");
   } catch (error) {
     console.log(error);
     return res.status(500).json("Something went wrong");

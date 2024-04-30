@@ -1,6 +1,7 @@
 export const INITIAL_STATE = {
   title: "",
   cat: "",
+  desc: "",
   images: [],
   shortTitle: "",
   shortDesc: "",

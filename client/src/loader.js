@@ -9,9 +9,3 @@ export async function gigsLoader({ request, params }) {
   });
 }
 
-export async function myGigLoader() {
-  const myGigPromise = apiRequest.get(`/gig/mygigs`);
-  return defer({
-    myGigResponse: myGigPromise,
-  });
-}

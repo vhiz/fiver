@@ -12,7 +12,7 @@ import MyGigs from "./pages/MyGigs";
 import Orders from "./pages/Orders";
 import Messages from "./pages/Messages";
 import useUserStore from "./useStore/useUserStore";
-import { gigsLoader, myGigLoader } from "./loader";
+import { gigsLoader} from "./loader";
 
 export default function App() {
   const { currentUser } = useUserStore();
@@ -43,7 +43,6 @@ export default function App() {
       children: [
         {
           path: "/mygigs",
-          loader: myGigLoader,
           element: <MyGigs />,
         },
         {

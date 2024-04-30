@@ -38,7 +38,6 @@ export default function Head({ isLoading, error }) {
     gig?.user?.Gig
   );
 
-  const sanitizedDesc = DOMPurify.sanitize(gig?.desc);
   return (
     <div className="my-4 flex flex-col gap-4 w-full">
       <h2 className="lg:text-2xl text-lg font-semibold capitalize opacity-90">
@@ -73,10 +72,9 @@ export default function Head({ isLoading, error }) {
         </Slider>
       </div>
       <h2 className="font-semibold text-xl opacity-90">About This Gig</h2>
-      <div
-        className="text-justify mb-8 px-4 opacity-75 text-sm lg:text-base"
-        dangerouslySetInnerHTML={{ __html: sanitizedDesc }}
-      ></div>
+      <div className="text-justify mb-8 px-4 opacity-75 text-sm lg:text-base">
+        {gig.desc}
+      </div>
       <div className="lg:hidden">
         {isLoading ? (
           <div className="skeleton h-[40vh] w-full"></div>

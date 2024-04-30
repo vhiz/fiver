@@ -1,6 +1,4 @@
 import { useReducer, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { gigReducer, INITIAL_STATE } from "../reducer/gigReducer";
 import upload from "../lib/upload";
 import { LuImagePlus } from "react-icons/lu";
@@ -9,7 +7,6 @@ import { IoCloudUpload } from "react-icons/io5";
 import apiRequest from "../lib/axios";
 
 export default function AddGig() {
-  const [desc, setDesc] = useState("");
   const [feature, setFeature] = useState("");
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
@@ -46,7 +43,8 @@ export default function AddGig() {
     if (uploaded) {
       toast.success("You have successfully uploaded your images");
     }
-    if (files.length < 1) {
+    if (files.length < 2) {
+      toast.error("You have to select some images");
       return;
     }
     setUploading(true);
@@ -69,12 +67,12 @@ export default function AddGig() {
   async function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    if (!desc) {
-      toast.error("Fill in the description");
-      return;
-    }
     try {
-      await apiRequest.post("/gig", { ...state, desc });
+      if (!uploaded) {
+        handleUpload();
+        return
+      }
+      await apiRequest.post("/gig", state);
       toast.success("Gig Added");
     } catch (error) {
       console.log(error);
@@ -147,6 +145,7 @@ export default function AddGig() {
               multiple
               accept="image/*"
               onChange={handleImgChange}
+              required
             />
           </label>
           <div className="flex gap-3 flex-wrap">
@@ -182,21 +181,22 @@ export default function AddGig() {
             <div className="label">
               <span className="label-text">Description</span>
             </div>
-            <ReactQuill
-              theme="snow"
-              value={desc}
-              onChange={setDesc}
-              className="h-full"
-            />
+            <textarea
+              className="textarea textarea-bordered h-full"
+              placeholder="Description"
+              name="desc"
+              onChange={handleChange}
+              required
+            ></textarea>
           </label>
           <button
-            className="btn btn-success w-full hidden lg:block mt-7"
+            className="btn btn-success w-full hidden lg:block"
             disabled={loading}
           >
             Create
           </button>
         </div>
-        <div className="flex-1 flex flex-col gap-5 lg:mt-0 mt-7">
+        <div className="flex-1 flex flex-col gap-5 lg:mt-0 ">
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Service Title</span>
