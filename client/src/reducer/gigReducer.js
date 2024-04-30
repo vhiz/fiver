@@ -40,6 +40,8 @@ export const gigReducer = (state, action) => {
           (feature) => feature !== action.payload
         ),
       };
+    case "CLEAR":
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -10,10 +10,14 @@ export default function Home() {
     <div>
       <Header />
       <Categories />
+      <Recent tag={"createdAt"} h2={"Latest Posting"} />
       <Features />
       <Testimonials />
       <Business />
-      <Recent />
+      <Recent
+        tag={"sales"}
+        h2={"Get inspired with projects made by our freelancers"}
+      />
     </div>
   );
 }

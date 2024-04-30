@@ -5,13 +5,14 @@ import { LuImagePlus } from "react-icons/lu";
 import toast from "react-hot-toast";
 import { IoCloudUpload } from "react-icons/io5";
 import apiRequest from "../lib/axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function AddGig() {
   const [feature, setFeature] = useState("");
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [state, dispatch] = useReducer(gigReducer, INITIAL_STATE);
 
   const handleChange = (e) => {
@@ -64,22 +65,33 @@ export default function AddGig() {
       setUploading(false);
     }
   };
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: () => {
+      return apiRequest.post("/gig", state);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["mygigs"] });
+      dispatch({
+        type: "CLEAR",
+      });
+      setFiles([]);
+      setUploaded(false);
+      document.getElementById("addGig").close();
+      toast.success("Gig Added");
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+    },
+  });
   async function handleSubmit(e) {
     e.preventDefault();
-    setLoading(true);
-    try {
-      if (!uploaded) {
-        handleUpload();
-        return
-      }
-      await apiRequest.post("/gig", state);
-      toast.success("Gig Added");
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
-    } finally {
-      setLoading(false);
+    if (!uploaded) {
+      toast.error("You have to upload images");
+      return;
     }
+    mutation.mutate();
   }
   return (
     <div className="modal-box w-[100vw] max-w-[100vw] lg:max-w-[80vw] max-h-[100vh] lg:h-[calc(100vh-5rem)]">
@@ -106,6 +118,7 @@ export default function AddGig() {
               name="title"
               onChange={handleChange}
               required
+              value={state.title}
             />
           </label>
           <label className="form-control w-full">
@@ -115,6 +128,7 @@ export default function AddGig() {
             <select
               className="select select-bordered"
               name="cat"
+              value={state.cat}
               onChange={handleChange}
               required
             >
@@ -186,12 +200,13 @@ export default function AddGig() {
               placeholder="Description"
               name="desc"
               onChange={handleChange}
+              value={state.desc}
               required
             ></textarea>
           </label>
           <button
             className="btn btn-success w-full hidden lg:block"
-            disabled={loading}
+            disabled={mutation.isPending}
           >
             Create
           </button>
@@ -206,6 +221,7 @@ export default function AddGig() {
               placeholder="Type here"
               className="input input-bordered w-full"
               name="shortTitle"
+              value={state.shortTitle}
               onChange={handleChange}
               required
             />
@@ -217,6 +233,7 @@ export default function AddGig() {
             <textarea
               className="textarea textarea-bordered h-24"
               placeholder="Short Desc"
+              value={state.shortDesc}
               name="shortDesc"
               onChange={handleChange}
               required
@@ -231,6 +248,7 @@ export default function AddGig() {
               placeholder="Type here"
               className="input input-bordered w-full"
               name="deliveryTime"
+              value={state.deliveryTime}
               onChange={handleChange}
               required
             />
@@ -243,6 +261,7 @@ export default function AddGig() {
               type="number"
               placeholder="Type here"
               className="input input-bordered w-full"
+              value={state.revisionNumber}
               name="revisionNumber"
               onChange={handleChange}
               required
@@ -287,13 +306,14 @@ export default function AddGig() {
               placeholder="Type here"
               className="input input-bordered w-full"
               name="price"
+              value={state.price}
               onChange={handleChange}
               required
             />
           </label>
           <button
             className="btn btn-success w-full lg:hidden"
-            disabled={loading}
+            disabled={mutation.isPending}
           >
             Create
           </button>

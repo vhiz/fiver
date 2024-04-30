@@ -25,10 +25,10 @@ export default function MyGigs() {
   }
 
   function handleSelectAll(data) {
-    if (selected.length === data.length) {
+    if (selected.length === data?.length) {
       setSelected([]);
     } else {
-      setSelected(data.map((item) => item.id));
+      setSelected(data?.map((item) => item.id));
     }
   }
 
@@ -104,7 +104,9 @@ export default function MyGigs() {
                     <input
                       type="checkbox"
                       className="checkbox"
-                      checked={selected.length === data.length}
+                      checked={
+                        selected.length === data.length && data.length !== 0
+                      }
                       onChange={() => handleSelectAll(data)}
                     />
                   </label>
