@@ -2,3 +2,4 @@
 /server/.env
 /client/src/lib/firebase.js
 /server/lib/firebase.js
+/client/src/useStore

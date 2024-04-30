@@ -9,9 +9,9 @@ export async function gigsLoader({ request, params }) {
   });
 }
 
-export async function gigLoader({ request, params }) {
-  const gigPromise = apiRequest.get(`/gig/single/${params.id}`);
+export async function myGigLoader() {
+  const myGigPromise = apiRequest.get(`/gig/mygigs`);
   return defer({
-    gigResponse: gigPromise,
+    myGigResponse: myGigPromise,
   });
 }

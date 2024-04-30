@@ -3,15 +3,15 @@ import useUserStore from "../useStore/useUserStore";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import apiRequest from "../lib/axios";
-import useReviewStore from "../useStore/useReviewStore";
+import useGigStore from "../useStore/useGigStore";
 
-export default function ReviewInput({ gig }) {
+export default function ReviewInput() {
+  const { gig, addReview } = useGigStore();
+
   const { currentUser } = useUserStore();
   const [rating, setRating] = useState(1);
   const [loading, setLoading] = useState(false);
   const [desc, setDesc] = useState("");
-  const { setReview } = useReviewStore();
-
   async function handleSend(e) {
     e.preventDefault();
     try {
@@ -21,9 +21,9 @@ export default function ReviewInput({ gig }) {
         star: rating,
         gigId: gig.id,
       });
-      setReview(res.data);
+      addReview(res.data);
       setDesc("");
-      setRating(0);
+      setRating(1);
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -38,7 +38,15 @@ export default function ReviewInput({ gig }) {
         </div>
       </div>
       <div className="w-full justify-center">
-        <div className="rating rating-sm">
+        <input
+          type="text"
+          placeholder="Type here"
+          className="input input-bordered w-full"
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
+          disabled={gig?.userId === currentUser.id}
+        />
+        <div className="rating rating-sm mt-2">
           <input
             type="radio"
             name="rating-2"
@@ -76,14 +84,6 @@ export default function ReviewInput({ gig }) {
             className="mask mask-star-2 bg-orange-400"
           />
         </div>
-        <input
-          type="text"
-          placeholder="Type here"
-          className="input input-bordered w-full"
-          value={desc}
-          onChange={(e) => setDesc(e.target.value)}
-          disabled={gig?.userId === currentUser.id}
-        />
       </div>
       <button
         disabled={gig?.userId === currentUser.id || loading}

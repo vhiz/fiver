@@ -5,21 +5,19 @@ import CheckOut from "./CheckOut";
 import StarRating from "../StarRating";
 import ReviewInput from "../ReviewInput";
 import useUserStore from "../../useStore/useUserStore";
-import { useEffect } from "react";
-import useReviewStore from "../../useStore/useReviewStore";
-import moment from "moment";
 
-export default function Head({ gig }) {
+import moment from "moment";
+import DOMPurify from "dompurify";
+import useGigStore from "../../useStore/useGigStore";
+import Error from "../Error";
+
+export default function Head({ isLoading, error }) {
   const { currentUser } = useUserStore();
-  const { setReview, review } = useReviewStore();
   const breakPoints = {
     960: { slidesPerView: 1, spaceBetween: 30 },
   };
-  useEffect(() => {
-    if (gig?.Review?.length > 0) {
-      setReview(...gig.Review);
-    }
-  }, []);
+  const { gig } = useGigStore();
+
   const getTotalStarsAndStarNumber = (gigs) => {
     const starsAndNumbers = gigs.map((gig) => ({
       totalStars: gig.totalStars,
@@ -39,6 +37,8 @@ export default function Head({ gig }) {
   const { totalStars, totalStarNumber } = getTotalStarsAndStarNumber(
     gig?.user?.Gig
   );
+
+  const sanitizedDesc = DOMPurify.sanitize(gig?.desc);
   return (
     <div className="my-4 flex flex-col gap-4 w-full">
       <h2 className="lg:text-2xl text-lg font-semibold capitalize opacity-90">
@@ -73,11 +73,18 @@ export default function Head({ gig }) {
         </Slider>
       </div>
       <h2 className="font-semibold text-xl opacity-90">About This Gig</h2>
-      <p className="text-justify capitalize mb-8 px-4 opacity-75 text-sm lg:text-base">
-        {gig?.desc}
-      </p>
+      <div
+        className="text-justify mb-8 px-4 opacity-75 text-sm lg:text-base"
+        dangerouslySetInnerHTML={{ __html: sanitizedDesc }}
+      ></div>
       <div className="lg:hidden">
-        <CheckOut />
+        {isLoading ? (
+          <div className="skeleton h-[40vh] w-full"></div>
+        ) : error ? (
+          <Error />
+        ) : (
+          <CheckOut />
+        )}
       </div>
 
       <div className="flex flex-col gap-y-4">
@@ -120,7 +127,7 @@ export default function Head({ gig }) {
           <div className="flex flex-col justify-center gap-y-1">
             <h3 className="font-semibold">Member Since</h3>
             <span className="font-thin">
-              {moment(gig?.user?.createdAt).format('MMMM YYYY')}
+              {moment(gig?.user?.createdAt).format("MMMM YYYY")}
             </span>
           </div>
           <div className="flex flex-col justify-center gap-y-1">
@@ -134,12 +141,10 @@ export default function Head({ gig }) {
       </div>
       <div className="mt-5 flex flex-col gap-y-3">
         <h2 className="text-2xl font-semibold">Reviews</h2>
-        {currentUser && <ReviewInput gig={gig} />}
-        {review
-          .sort((a, b) => b.createdAt - a.createdAt)
-          .map((review) => (
-            <Review key={review?.id} review={review} />
-          ))}
+        {currentUser && <ReviewInput />}
+        {gig.Review.sort((a, b) => b.createdAt - a.createdAt).map((review) => (
+          <Review key={review?.id} review={review} />
+        ))}
       </div>
     </div>
   );

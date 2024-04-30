@@ -8,6 +8,9 @@ export async function CreateGig(req, res) {
       data: {
         userId: req.userId,
         ...body,
+        deliveryTime: parseInt(body.deliveryTime),
+        revisionNumber: parseInt(body.revisionNumber),
+        price: parseInt(body.price),
       },
     });
     return res.status(201).json(gig);
@@ -79,6 +82,9 @@ export async function GetGig(req, res) {
               },
             },
           },
+          orderBy: {
+            createdAt: "asc",
+          },
         },
         Liked: {
           select: {
@@ -127,6 +133,23 @@ export async function LikeGig(req, res) {
     }
   } catch (error) {
     console.log(error);
+    return res.status(500).json("Something went wrong");
+  }
+}
+
+export async function GetUserGigs(req, res) {
+  try {
+    const userGigs = await prisma.user.findUnique({
+      where: {
+        id: req.userId,
+      },
+      select: {
+        Gig: true,
+      },
+    });
+    const { Gig, ...other } = userGigs;
+    return res.status(200).json(Gig);
+  } catch (error) {
     return res.status(500).json("Something went wrong");
   }
 }
