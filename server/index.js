@@ -8,6 +8,7 @@ import authRoute from "./routes/authRoute.js";
 import userRoute from "./routes/userRoute.js";
 import gigRoute from "./routes/gigRoute.js";
 import reviewRoute from "./routes/reviewRoute.js";
+import conversationRoute from "./routes/conversationRoute.js";
 
 app.use(helmet());
 app.use(cookieParser());
@@ -18,6 +19,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
 app.use("/api/gig", gigRoute);
 app.use("/api/review", reviewRoute);
+app.use("/api/conversation", conversationRoute);
 
 app.use("*", (req, res) => {
   return res.status(404).json("Not found");

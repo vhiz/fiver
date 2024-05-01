@@ -1,10 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
 import { LiaBookReaderSolid } from "react-icons/lia";
-import MessageContainer from "../components/MessageComp/MessageContainer";
-const user = {
-  isSeller: false,
-};
+import apiRequest from "../lib/axios";
+import Error from "../components/Error";
+import useUserStore from "../useStore/useUserStore";
+import useMessagesStore from "../useStore/useMessagesStore";
 
 export default function Messages() {
+  const { currentUser } = useUserStore();
+  const { setMessages } = useMessagesStore();
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["conversations"],
+    queryFn: async () =>
+      await apiRequest.get(`/conversation`).then((res) => {
+        return res.data;
+      }),
+  });
   return (
     <div className="p-3">
       <div className="flex ic justify-between mb-3">
@@ -16,18 +27,32 @@ export default function Messages() {
 
           <thead>
             <tr>
-              <th>{user.isSeller ? "Buyer" : "Seller"}</th>
+              <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
               <th>Last Message</th>
               <th>Date</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {Array(10)
-              .fill()
-              .map((item, i) => (
+            {isLoading ? (
+              <div className="flex flex-col gap-2">
+                <div className="skeleton h-9 w-full"></div>
+                <div className="skeleton h-9 w-full"></div>
+                <div className="skeleton h-9 w-full"></div>
+                <div className="skeleton h-9 w-full"></div>
+                <div className="skeleton h-9 w-full"></div>
+                <div className="skeleton h-9 w-full"></div>
+                <div className="skeleton h-9 w-full"></div>
+              </div>
+            ) : error ? (
+              <Error />
+            ) : (
+              data.map((item, i) => (
                 <tr
-                  onClick={() => document.getElementById("message").showModal()}
+                  onClick={() => {
+                    setMessages(item.id, item.receiver);
+                    document.getElementById("message").showModal();
+                  }}
                   key={i}
                   className="cursor-pointer"
                 >
@@ -35,21 +60,20 @@ export default function Messages() {
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src="https://plus.unsplash.com/premium_photo-1663933534267-fe6969cd26e1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8"
-                            alt="Avatar Tailwind CSS Component"
-                          />
+                          <img src={item.receiver.img} />
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">Hart Hagerty</div>
-                        <div className="text-sm opacity-50">United States</div>
+                        <div className="font-bold capitalize">
+                          {item.receiver.name}
+                        </div>
+                        <div className="text-sm opacity-50">
+                          {item.receiver.countryName}
+                        </div>
                       </div>
                     </div>
                   </td>
-                  <td className="max-w-[30vw]">
-                    later explanation bag review surface drawn dug
-                  </td>
+                  <td className="max-w-[30vw]">{item.lastMessage}</td>
                   <td>2 days ago</td>
                   <td>
                     <button
@@ -60,12 +84,13 @@ export default function Messages() {
                     </button>
                   </td>
                 </tr>
-              ))}
+              ))
+            )}
           </tbody>
           {/* foot */}
           <tfoot>
             <tr>
-              <th>{user.isSeller ? "Buyer" : "Seller"}</th>
+              <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
               <th>Last Message</th>
               <th>Date</th>
               <th>Action</th>
@@ -73,7 +98,6 @@ export default function Messages() {
           </tfoot>
         </table>
       </div>
-      <MessageContainer />
     </div>
   );
 }

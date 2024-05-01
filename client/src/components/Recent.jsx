@@ -32,11 +32,11 @@ export default function Recent({ tag, h2 }) {
         data.map((item, i) => (
           <SwiperSlide key={i}>
             <Link to={`/gig/${item.id}`} className="card card-compact bg-base-100 shadow-xl btn btn-ghost h-[50vh] flex-col flex-nowrap items-start">
-              <figure className="px-5 pt-5">
+              <figure className="px-5 pt-5 w-full h-[80%]">
                 <img
                   src={item.images[0]}
                   alt="Shoes"
-                  className="rounded-xl"
+                  className="rounded-xl h-full w-full object-cover"
                 />
               </figure>
               <div className="card-body flex flex-row gap-x-2 items-center">

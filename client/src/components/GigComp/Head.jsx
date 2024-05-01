@@ -49,7 +49,7 @@ export default function Head({ isLoading, error }) {
             <img src={gig?.user?.img} />
           </div>
         </div>
-        <span className="font-semibold">Joe Walsh</span>
+        <span className="font-semibold capitalize">{gig.user.name}</span>
         {!isNaN(gig.totalStars / gig.starNumber) && (
           <StarRating
             starNumber={Math.round(gig.totalStars / gig.starNumber)}
