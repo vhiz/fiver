@@ -108,7 +108,6 @@ model Conversation {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   users       User[]
   userIds     String[]  @db.ObjectId
-  seenBy      String[]  @db.ObjectId
   createdAt   DateTime  @default(now())
   lastMessage String?
   messages    Message[]
@@ -120,6 +119,7 @@ model Message {
   userId         String       @db.ObjectId
   receiverId     String       @db.ObjectId
   text           String
+  read           Boolean      @default(false)
   createdAt      DateTime     @default(now())
   conversation   Conversation @relation(fields: [conversationId], references: [id])
   conversationId String       @db.ObjectId

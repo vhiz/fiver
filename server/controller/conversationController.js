@@ -31,6 +31,9 @@ export async function GetConversations(req, res) {
           hasSome: [userId],
         },
       },
+      include: {
+        messages: true,
+      },
     });
     const conversationWithUser = await Promise.all(
       conversations.map(async (conversation) => {
@@ -57,20 +60,37 @@ export async function GetConversations(req, res) {
 }
 export async function GetConversation(req, res) {
   try {
-    const conversation = await prisma.conversation.findUnique({
-      where: {
-        id: req.params.id,
-      },
-      include: {
-        messages: {
-          orderBy: {
-            createdAt: "asc",
+    const userId = req.userId;
+    const conversation = await Promise.all([
+      prisma.conversation.findUnique({
+        where: {
+          id: req.params.id,
+        },
+        include: {
+          messages: {
+            orderBy: {
+              createdAt: "asc",
+            },
           },
         },
-      },
+      }),
+      prisma.message.updateMany({
+        where: {
+          conversationId: req.params.id,
+          receiverId: userId,
+        },
+        data: {
+          read: true,
+        },
+      }),
+    ]).then(([conversation]) => {
+      // conversation is now available
+      // you can use it here
+      return conversation;
     });
     return res.status(200).json(conversation);
   } catch (error) {
+    console.log(error);
     return res.status(400).json("Something went wrong");
   }
 }
@@ -86,6 +106,26 @@ export async function AddMessage(req, res) {
         text: req.body.text,
       },
     });
+
+    await Promise.all([
+      prisma.conversation.update({
+        where: {
+          id: req.body.conversationId,
+        },
+        data: {
+          lastMessage: req.body.text,
+        },
+      }),
+      prisma.message.updateMany({
+        where: {
+          conversationId: req.body.conversationId,
+          receiverId: userId,
+        },
+        data: {
+          read: true,
+        },
+      }),
+    ]);
     return res.status(200).json(message);
   } catch (error) {
     return res.status(400).json("Something went wrong");

@@ -1,13 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { LiaBookReaderSolid } from "react-icons/lia";
 import apiRequest from "../lib/axios";
 import Error from "../components/Error";
 import useUserStore from "../useStore/useUserStore";
 import useMessagesStore from "../useStore/useMessagesStore";
+import moment from "moment";
+import MessageContainer from "../components/MessageComp/MessageContainer";
 
 export default function Messages() {
   const { currentUser } = useUserStore();
   const { setMessages } = useMessagesStore();
+  const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["conversations"],
@@ -16,6 +19,13 @@ export default function Messages() {
         return res.data;
       }),
   });
+
+  function isRead(messages) {
+    const unreadMessage = messages
+      .filter((message) => message.receiverId === currentUser.id)
+      .filter((message) => message.read === false);
+    return unreadMessage.length > 0 ? true : false;
+  }
   return (
     <div className="p-3">
       <div className="flex ic justify-between mb-3">
@@ -35,15 +45,18 @@ export default function Messages() {
           </thead>
           <tbody>
             {isLoading ? (
-              <div className="flex flex-col gap-2">
-                <div className="skeleton h-9 w-full"></div>
-                <div className="skeleton h-9 w-full"></div>
-                <div className="skeleton h-9 w-full"></div>
-                <div className="skeleton h-9 w-full"></div>
-                <div className="skeleton h-9 w-full"></div>
-                <div className="skeleton h-9 w-full"></div>
-                <div className="skeleton h-9 w-full"></div>
-              </div>
+              <>
+                {Array(5)
+                  .fill()
+                  .map((item, i) => (
+                    <tr className="gap-x-2 mt-3" key={i}>
+                      <td className="skeleton h-9"></td>
+                      <td className="skeleton h-9"></td>
+                      <td className="skeleton h-9"></td>
+                      <td className="skeleton h-9"></td>
+                    </tr>
+                  ))}
+              </>
             ) : error ? (
               <Error />
             ) : (
@@ -52,9 +65,14 @@ export default function Messages() {
                   onClick={() => {
                     setMessages(item.id, item.receiver);
                     document.getElementById("message").showModal();
+                    queryClient.invalidateQueries({
+                      queryKey: ["conversations"],
+                    });
                   }}
                   key={i}
-                  className="cursor-pointer"
+                  className={`cursor-pointer ${
+                    isRead(item.messages) ? "bg-gray-300/10" : ""
+                  }`}
                 >
                   <td>
                     <div className="flex items-center gap-3">
@@ -74,7 +92,7 @@ export default function Messages() {
                     </div>
                   </td>
                   <td className="max-w-[30vw]">{item.lastMessage}</td>
-                  <td>2 days ago</td>
+                  <td>{moment(item.createdAt).fromNow()}</td>
                   <td>
                     <button
                       to={"/messages"}
@@ -98,6 +116,12 @@ export default function Messages() {
           </tfoot>
         </table>
       </div>
+      <dialog id="message" className="modal">
+        <MessageContainer />
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 }

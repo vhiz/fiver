@@ -3,10 +3,13 @@ import { BsSend } from "react-icons/bs";
 import apiRequest from "../../lib/axios";
 import toast from "react-hot-toast";
 import useMessagesStore from "../../useStore/useMessagesStore";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function MessageInput() {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
+
   const { isLoading, receiver, conversationId, addMessage } =
     useMessagesStore();
 
@@ -21,8 +24,9 @@ export default function MessageInput() {
       });
       setText("");
       addMessage(res.data);
+      queryClient.invalidateQueries({ queryKey: ["conversations"] });
+
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong");
     } finally {
       setLoading(false);

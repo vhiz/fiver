@@ -8,7 +8,6 @@ import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import Seller from "./Seller";
 import useUserStore from "../useStore/useUserStore";
-import MessageContainer from "./MessageComp/MessageContainer";
 
 export default function Layout() {
   const { currentUser } = useUserStore();
@@ -43,12 +42,7 @@ export default function Layout() {
             <button>close</button>
           </form>
         </dialog>
-        <dialog id="message" className="modal">
-          <MessageContainer />
-          <form method="dialog" className="modal-backdrop">
-            <button>close</button>
-          </form>
-        </dialog>
+
         <Footer />
       </div>
       <div className="drawer-side z-[999]">
