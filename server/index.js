@@ -2,13 +2,13 @@ import express from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-const app = express();
 
 import authRoute from "./routes/authRoute.js";
 import userRoute from "./routes/userRoute.js";
 import gigRoute from "./routes/gigRoute.js";
 import reviewRoute from "./routes/reviewRoute.js";
 import conversationRoute from "./routes/conversationRoute.js";
+import { app, server } from "./routes/socket.js";
 
 app.use(helmet());
 app.use(cookieParser());
@@ -26,6 +26,6 @@ app.use("*", (req, res) => {
 });
 
 const Port = process.env.PORT || 3001;
-app.listen(Port, () => {
+server.listen(Port, () => {
   console.log("Sever running on " + Port);
 });

@@ -6,7 +6,7 @@ import useUserStore from "../../useStore/useUserStore";
 import useMessagesStore from "../../useStore/useMessagesStore";
 
 export default function MessageContainer() {
-  const { messages, isLoading, error, receiver } = useMessagesStore();
+  const { messages, isLoading, error, receiver, reset } = useMessagesStore();
   const { currentUser } = useUserStore();
   const endRef = useRef();
 
@@ -16,16 +16,18 @@ export default function MessageContainer() {
   return (
     <div className="modal-box w-[100vw] max-w-[100vw] lg:max-w-[80vw] max-h-[100vh] lg:h-[calc(100vh-5rem)] flex flex-col p-0">
       <form method="dialog" className="lg:hidden">
-        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        <button
+          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          onClick={() => reset()}
+        >
           ✕
         </button>
       </form>
       <div className="flex p-3 input-bordered border-b gap-2 items-center">
-        {isLoading||error ? (
+        {isLoading || error ? (
           <>
             <div className="avatar">
-              <div className="w-12 skeleton rounded-full">
-              </div>
+              <div className="w-12 skeleton rounded-full"></div>
             </div>
             <span className="capitalize skeleton w-20 h-5"></span>
           </>

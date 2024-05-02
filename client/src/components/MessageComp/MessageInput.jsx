@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BsSend } from "react-icons/bs";
 import apiRequest from "../../lib/axios";
 import toast from "react-hot-toast";
 import useMessagesStore from "../../useStore/useMessagesStore";
 import { useQueryClient } from "@tanstack/react-query";
+import { SocketContext } from "../../contex/SocketContext";
 
 export default function MessageInput() {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
+  const { socket } = useContext(SocketContext);
 
   const { isLoading, receiver, conversationId, addMessage } =
     useMessagesStore();
@@ -24,8 +26,11 @@ export default function MessageInput() {
       });
       setText("");
       addMessage(res.data);
+      socket.emit("sendMessage", {
+        receiver: receiver,
+        data: res.data,
+      });
       queryClient.invalidateQueries({ queryKey: ["conversations"] });
-
     } catch (error) {
       toast.error("Something went wrong");
     } finally {

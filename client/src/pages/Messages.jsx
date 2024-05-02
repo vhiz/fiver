@@ -6,11 +6,15 @@ import useUserStore from "../useStore/useUserStore";
 import useMessagesStore from "../useStore/useMessagesStore";
 import moment from "moment";
 import MessageContainer from "../components/MessageComp/MessageContainer";
+import { useContext, useEffect } from "react";
+import { SocketContext } from "../contex/SocketContext";
+import toast from "react-hot-toast";
 
 export default function Messages() {
   const { currentUser } = useUserStore();
-  const { setMessages } = useMessagesStore();
+  const { setMessages, conversationId, addMessage, reset } = useMessagesStore();
   const queryClient = useQueryClient();
+  const { socket } = useContext(SocketContext);
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["conversations"],
@@ -19,13 +23,57 @@ export default function Messages() {
         return res.data;
       }),
   });
-
   function isRead(messages) {
     const unreadMessage = messages
       .filter((message) => message.receiverId === currentUser.id)
       .filter((message) => message.read === false);
     return unreadMessage.length > 0 ? true : false;
   }
+
+  useEffect(() => {
+    if (data && socket) {
+      socket.on("getMessage", (data) => {
+        if (conversationId === data.conversationId) {
+          const { receiver, ...others } = data;
+          addMessage(others);
+        } else if (data.receiver.id === currentUser.id) {
+          toast(
+            <div
+              className="flex gap-x-5 items-center w-[30vw] cursor-pointer"
+              onClick={() => {
+                setMessages(data.conversationId, data.receiver);
+                document.getElementById("message").showModal();
+                queryClient.invalidateQueries({
+                  queryKey: ["conversations"],
+                });
+              }}
+            >
+              <img
+                src={data.receiver.img}
+                alt=""
+                className="w-10 h-10 object-cover rounded-full"
+              />
+              <div className="flex flex-col justify-center w-full">
+                <h2 className="text-sm font-bol capitalize">
+                  {data.receiver.name}
+                </h2>
+                <p className="text-xs font-thin">{data.text}</p>
+              </div>
+            </div>,
+            {
+              position: "top-right",
+              duration: 3000,
+            }
+          );
+        }
+      });
+    }
+    return () => {
+      if (socket) {
+        socket.off("getMessage");
+      }
+    };
+  }, [addMessage, conversationId, currentUser.id, data, queryClient, setMessages, socket]);
   return (
     <div className="p-3">
       <div className="flex ic justify-between mb-3">
@@ -119,7 +167,7 @@ export default function Messages() {
       <dialog id="message" className="modal">
         <MessageContainer />
         <form method="dialog" className="modal-backdrop">
-          <button>close</button>
+          <button onClick={() => reset()}>close</button>
         </form>
       </dialog>
     </div>
