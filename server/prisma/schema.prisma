@@ -94,14 +94,14 @@ model Review {
 }
 
 model Order {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  gig          Gig      @relation(fields: [gigId], references: [id], onDelete: Cascade)
-  gigId        String   @db.ObjectId
-  createdAt    DateTime @default(now())
-  isCompleted  Boolean  @default(false)
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       String   @db.ObjectId
-  secondUserId String   @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  gig         Gig      @relation(fields: [gigId], references: [id], onDelete: Cascade)
+  gigId       String   @db.ObjectId
+  createdAt   DateTime @default(now())
+  isCompleted Boolean  @default(false)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String   @db.ObjectId
+  sellerId    String   @db.ObjectId
 }
 
 model Conversation {
@@ -110,6 +110,7 @@ model Conversation {
   userIds     String[]  @db.ObjectId
   createdAt   DateTime  @default(now())
   lastMessage String?
+  updatedAt   String?
   messages    Message[]
 }
 

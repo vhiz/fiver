@@ -1,52 +1,17 @@
+import { useQuery } from "@tanstack/react-query";
 import { BiMessageSquareDots } from "react-icons/bi";
 import { Link } from "react-router-dom";
-
-const user = {
-  isSeller: false,
-};
+import apiRequest from "../lib/axios";
 
 export default function Orders() {
-  const data = [
-    {
-      id: 53542866678797,
-    },
-    {
-      id: 75471312178797,
-    },
-    {
-      id: 37205998288797,
-    },
-    {
-      id: 70875765668797,
-    },
-    {
-      id: 62046543858797,
-    },
-    {
-      id: 23998101808797,
-    },
-    {
-      id: 8396133428797,
-    },
-    {
-      id: 50269224488797,
-    },
-    {
-      id: 87618386598797,
-    },
-    {
-      id: 58403120118797,
-    },
-    {
-      id: 29317206918797,
-    },
-    {
-      id: 56261159148797,
-    },
-    {
-      id: 40931076608797,
-    },
-  ];
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["orders"],
+    queryFn: async () =>
+      await apiRequest.get(`/orders`).then((res) => {
+        return res.data;
+      }),
+  });
+  console.log(data)
   return (
     <div className="p-3">
       <div className="flex ic justify-between mb-3">
@@ -61,12 +26,12 @@ export default function Orders() {
               <th>Image</th>
               <th>Title</th>
               <th>Price</th>
-              <th>{user.isSeller ? "Buyer" : "Seller"}</th>
+              <th>Date</th>
               <th>Contact</th>
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
+            {/* {data.map((item) => (
               <tr key={item.id}>
                 <td>
                   <div className="avatar">
@@ -82,12 +47,15 @@ export default function Orders() {
                 <td>$100</td>
                 <td>1003</td>
                 <td>
-                  <Link to={'/messages'} className="btn  btn-circle btn-sm btn-primary lg:btn-md">
+                  <Link
+                    to={"/messages"}
+                    className="btn  btn-circle btn-sm btn-primary lg:btn-md"
+                  >
                     <BiMessageSquareDots />
                   </Link>
                 </td>
               </tr>
-            ))}
+            ))} */}
           </tbody>
           {/* foot */}
           <tfoot>
@@ -95,7 +63,7 @@ export default function Orders() {
               <th>Image</th>
               <th>Title</th>
               <th>Price</th>
-              <th>{user.isSeller ? "Buyer" : "Seller"}</th>
+              <th>Date</th>
               <th>Contact</th>
             </tr>
           </tfoot>

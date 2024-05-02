@@ -73,7 +73,15 @@ export default function Messages() {
         socket.off("getMessage");
       }
     };
-  }, [addMessage, conversationId, currentUser.id, data, queryClient, setMessages, socket]);
+  }, [
+    addMessage,
+    conversationId,
+    currentUser.id,
+    data,
+    queryClient,
+    setMessages,
+    socket,
+  ]);
   return (
     <div className="p-3">
       <div className="flex ic justify-between mb-3">
@@ -140,7 +148,7 @@ export default function Messages() {
                     </div>
                   </td>
                   <td className="max-w-[30vw]">{item.lastMessage}</td>
-                  <td>{moment(item.createdAt).fromNow()}</td>
+                  <td>{moment(item.updatedAt).fromNow()}</td>
                   <td>
                     <button
                       to={"/messages"}

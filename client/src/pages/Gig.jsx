@@ -84,7 +84,7 @@ export default function Gig() {
         ""
       ) : (
         <>
-          {gig.userId !== currentUser.id && (
+          {currentUser && gig.userId !== currentUser.id && (
             <button
               disabled={mutation.isPending}
               className={`btn glass fixed bottom-10 left-4 rounded-full h-20 ${

@@ -114,6 +114,7 @@ export async function AddMessage(req, res) {
         },
         data: {
           lastMessage: req.body.text,
+          updatedAt: new Date().toISOString(),
         },
       }),
       prisma.message.updateMany({
@@ -128,6 +129,7 @@ export async function AddMessage(req, res) {
     ]);
     return res.status(200).json(message);
   } catch (error) {
+    console.log(error)
     return res.status(400).json("Something went wrong");
   }
 }

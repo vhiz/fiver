@@ -1,18 +1,38 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Message from "./Message";
 import MessageInput from "./MessageInput";
 import Error from "../Error";
 import useUserStore from "../../useStore/useUserStore";
 import useMessagesStore from "../../useStore/useMessagesStore";
+import { SocketContext } from "../../contex/SocketContext";
 
 export default function MessageContainer() {
-  const { messages, isLoading, error, receiver, reset } = useMessagesStore();
+  const { messages, isLoading, error, receiver, reset, conversationId } =
+    useMessagesStore();
   const { currentUser } = useUserStore();
   const endRef = useRef();
+  const { socket } = useContext(SocketContext);
 
   useEffect(() => {
     endRef.current.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const [typing, setTyping] = useState(false);
+  useEffect(() => {
+    socket?.on("getTyping", (data) => {
+      if (data.receiverId === currentUser.id) {
+        if (conversationId === data.conversationId) {
+          setTyping(data.typing);
+        }
+      }
+    });
+
+    return () => {
+      if (socket) {
+        socket.off("getTyping");
+      }
+    };
+  }, [conversationId, currentUser, socket, typing]);
   return (
     <div className="modal-box w-[100vw] max-w-[100vw] lg:max-w-[80vw] max-h-[100vh] lg:h-[calc(100vh-5rem)] flex flex-col p-0">
       <form method="dialog" className="lg:hidden">
@@ -38,7 +58,14 @@ export default function MessageContainer() {
                 <img src={receiver?.img} />
               </div>
             </div>
-            <span className="capitalize">{receiver?.name}</span>
+            <div className="flex flex-col">
+              <span className="capitalize">{receiver?.name}</span>
+              {typing && (
+                <span className="font-thin text-success animate-twPulse animate-infinite">
+                  {receiver?.name} is typing
+                </span>
+              )}
+            </div>
           </>
         )}
       </div>
