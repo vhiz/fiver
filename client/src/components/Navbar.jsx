@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { Link, useLocation } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
@@ -6,10 +6,12 @@ import Toggle from "./Toggle";
 import useUserStore from "../useStore/useUserStore";
 import toast from "react-hot-toast";
 import apiRequest from "../lib/axios";
+import { SocketContext } from "../contex/SocketContext";
 
 export default function Navbar() {
   const [active, setActive] = useState(false);
   const { currentUser, setCurrentUser } = useUserStore();
+  const { socket } = useContext(SocketContext);
   function isActive() {
     window.scrollY > 0 ? setActive(true) : setActive(false);
   }
@@ -25,6 +27,7 @@ export default function Navbar() {
     try {
       await apiRequest.post("/auth/logout");
       setCurrentUser(null);
+      socket?.emit("logout", currentUser?.id);
     } catch (error) {
       toast.error("Something went wrong");
     }

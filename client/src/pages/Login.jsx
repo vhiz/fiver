@@ -3,10 +3,13 @@ import toast from "react-hot-toast";
 import { IoIosCheckmark } from "react-icons/io";
 import apiRequest from "../lib/axios";
 import useUserStore from "../useStore/useUserStore";
-
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { FaUnlockKeyhole } from "react-icons/fa6";
+import { IoMdMail } from "react-icons/io";
 export default function Login() {
   const [inputs, setInputs] = useState({});
   const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState(false);
   const { setCurrentUser } = useUserStore();
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -79,27 +82,39 @@ export default function Login() {
             <div className="label">
               <span className="label-text">Email</span>
             </div>
-            <input
-              type="email"
-              placeholder="Type here"
-              className="input input-bordered w-full"
-              onChange={handleChange}
-              name="email"
-              required
-            />
+            <label className="input input-bordered flex items-center gap-2 w-full">
+              <IoMdMail className="opacity-70 w-4 h-4" />
+              <input
+                type="email"
+                placeholder="Type here"
+                className="grow"
+                onChange={handleChange}
+                name="email"
+                required
+              />
+            </label>
           </label>
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Password</span>
             </div>
-            <input
-              type="password"
-              placeholder="Type here"
-              className="input input-bordered w-full"
-              onChange={handleChange}
-              name="password"
-              required
-            />
+            <label className="input input-bordered flex items-center gap-2 w-full">
+              <FaUnlockKeyhole className="opacity-70 w-4 h-4" />
+              <input
+                type={password ? "text" : "password"}
+                placeholder="Type here"
+                className="grow"
+                onChange={handleChange}
+                name="password"
+                required
+              />
+              <div
+                className="btn btn-ghost btn-circle btn-sm opacity-70"
+                onClick={() => setPassword((prev) => !prev)}
+              >
+                {password ? <IoEyeOutline /> : <IoEyeOffOutline />}
+              </div>
+            </label>
           </label>
           <button disabled={loading} className="btn btn-info mt-2">
             Continue

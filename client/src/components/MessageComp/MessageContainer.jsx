@@ -11,7 +11,7 @@ export default function MessageContainer() {
     useMessagesStore();
   const { currentUser } = useUserStore();
   const endRef = useRef();
-  const { socket } = useContext(SocketContext);
+  const { socket,onlineUsers } = useContext(SocketContext);
 
   useEffect(() => {
     endRef.current.scrollIntoView({ behavior: "smooth" });
@@ -53,7 +53,7 @@ export default function MessageContainer() {
           </>
         ) : (
           <>
-            <div className="avatar">
+            <div className={`avatar ${onlineUsers.includes(receiver.id)?'online':'offline'}`}>
               <div className="w-12 rounded-full">
                 <img src={receiver?.img} />
               </div>

@@ -1,13 +1,19 @@
 import toast from "react-hot-toast";
 import apiRequest from "../lib/axios";
 import useUserStore from "../useStore/useUserStore";
+import { SocketContext } from "../contex/SocketContext";
+import { useContext } from "react";
 
 export default function Mobile() {
   const { currentUser, setCurrentUser } = useUserStore();
+  const { socket } = useContext(SocketContext);
+
   async function handleLogout() {
     try {
       await apiRequest.post("/auth/logout");
       setCurrentUser(null);
+      socket?.emit("logout", currentUser?.id);
+
     } catch (error) {
       toast.error("Something went wrong");
     }

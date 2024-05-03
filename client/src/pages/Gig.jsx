@@ -8,6 +8,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useGigStore from "../useStore/useGigStore";
 import useUserStore from "../useStore/useUserStore";
 import toast from "react-hot-toast";
+import { useContext } from "react";
+import { SocketContext } from "../contex/SocketContext";
 
 export default function Gig() {
   const { id } = useParams();
@@ -23,7 +25,7 @@ export default function Gig() {
       }),
   });
   const queryClient = useQueryClient();
-
+  const { onlineUsers } = useContext(SocketContext);
   const mutation = useMutation({
     mutationFn: () => {
       return apiRequest.post("/conversation", { receiverId: gig?.userId });
@@ -92,7 +94,11 @@ export default function Gig() {
               }`}
               onClick={handleMessage}
             >
-              <div className="avatar">
+              <div
+                className={`avatar ${
+                  onlineUsers.includes(gig.userId) ? "online" : "offline"
+                }`}
+              >
                 <div className="w-12 rounded-full">
                   <img src={gig.user.img} />
                 </div>

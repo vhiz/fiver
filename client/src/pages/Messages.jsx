@@ -14,7 +14,7 @@ export default function Messages() {
   const { currentUser } = useUserStore();
   const { setMessages, conversationId, addMessage, reset } = useMessagesStore();
   const queryClient = useQueryClient();
-  const { socket } = useContext(SocketContext);
+  const { socket,onlineUsers } = useContext(SocketContext);
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["conversations"],
@@ -34,9 +34,14 @@ export default function Messages() {
     if (data && socket) {
       socket.on("getMessage", (data) => {
         if (conversationId === data.conversationId) {
+          const play = new Audio("/noti2.mp3");
+          play.play();
+          // eslint-disable-next-line no-unused-vars
           const { receiver, ...others } = data;
           addMessage(others);
         } else if (data.receiver.id === currentUser.id) {
+            const play = new Audio("/noti.mp3");
+          play.play();
           toast(
             <div
               className="flex gap-x-5 items-center w-[30vw] cursor-pointer"
@@ -132,7 +137,7 @@ export default function Messages() {
                 >
                   <td>
                     <div className="flex items-center gap-3">
-                      <div className="avatar">
+                      <div className={`avatar ${onlineUsers.includes(item.receiver.id)?'online':'offline'}`}>
                         <div className="mask mask-squircle w-12 h-12">
                           <img src={item.receiver.img} />
                         </div>

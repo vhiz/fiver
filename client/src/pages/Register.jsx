@@ -1,15 +1,19 @@
 import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { IoIosCheckmark } from "react-icons/io";
+import { IoIosCheckmark, IoMdMail } from "react-icons/io";
 import apiRequest from "../lib/axios";
 import useUserStore from "../useStore/useUserStore";
 import countryList from "react-select-country-list";
 import PhoneInput from "react-phone-number-input";
+import { FaUnlockKeyhole } from "react-icons/fa6";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { FaUser } from "react-icons/fa";
 
 export default function Register() {
   const [inputs, setInputs] = useState({});
   const [country, setCountry] = useState({});
   const [loading, setLoading] = useState(false);
+  const [password, setPassword] = useState(false);
   const [phone, setPhone] = useState();
   const { currentUser } = useUserStore();
   const options = useMemo(() => countryList().getData(), []);
@@ -102,40 +106,55 @@ export default function Register() {
             <div className="label">
               <span className="label-text">Email</span>
             </div>
-            <input
-              type="email"
-              placeholder="Type here"
-              className="input input-bordered w-full"
-              name="email"
-              onChange={handleChange}
-              required
-            />
+            <label className="input input-bordered flex items-center gap-2 w-full">
+              <IoMdMail className="opacity-70 w-4 h-4" />
+              <input
+                type="email"
+                placeholder="Type here"
+                className="grow"
+                name="email"
+                onChange={handleChange}
+                required
+              />
+            </label>
           </label>
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Password</span>
             </div>
-            <input
-              type="password"
-              placeholder="Type here"
-              name="password"
-              onChange={handleChange}
-              required
-              className="input input-bordered w-full"
-            />
+            <label className="input input-bordered flex items-center gap-2 w-full">
+              <FaUnlockKeyhole className="opacity-70 w-4 h-4" />
+              <input
+                type={password ? "text" : "password"}
+                placeholder="Type here"
+                className="grow"
+                onChange={handleChange}
+                name="password"
+                required
+              />
+              <div
+                className="btn btn-ghost btn-circle btn-sm opacity-70"
+                onClick={() => setPassword((prev) => !prev)}
+              >
+                {password ? <IoEyeOutline /> : <IoEyeOffOutline />}
+              </div>
+            </label>
           </label>
           <label className="form-control w-full">
             <div className="label">
               <span className="label-text">Name</span>
             </div>
-            <input
-              type="text"
-              placeholder="Type here"
-              name="name"
-              required
-              onChange={handleChange}
-              className="input input-bordered w-full"
-            />
+            <label className="input-bordered input flex items-center gap-2 w-full">
+              <FaUser  className="w-4 h-4 opacity-70"/>
+              <input
+                type="text"
+                placeholder="Type here"
+                name="name"
+                required
+                onChange={handleChange}
+                className="grow"
+              />
+            </label>
           </label>
           <label className="form-control w-full">
             <div className="label">

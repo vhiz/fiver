@@ -24,8 +24,6 @@ const getUser = (userId) => {
 };
 
 io.on("connection", function (socket) {
-  console.log(`New connection: ${socket.id}`);
-
   socket.on("addUsers", (userId) => {
     addUser(userId, socket.id);
     io.emit("onlineUsers", users);
@@ -41,10 +39,13 @@ io.on("connection", function (socket) {
     if (!receiver) return;
     io.to(receiver.socketId).emit("getTyping", data);
   });
+  socket.on("logout", (id) => {
+    users = users.filter((user) => user.userId !== id);
+    io.emit("onlineUsers", users);
+  });
 
   socket.on("disconnect", () => {
     removeUser(socket.id);
     io.emit("onlineUsers", users);
-    console.log(`${socket.id} disconnected`);
   });
 });

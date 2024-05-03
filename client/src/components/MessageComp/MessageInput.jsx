@@ -1,38 +1,36 @@
 import { useContext, useState } from "react";
 import { BsSend } from "react-icons/bs";
-import apiRequest from "../../lib/axios";
 import toast from "react-hot-toast";
 import useMessagesStore from "../../useStore/useMessagesStore";
-import { useQueryClient } from "@tanstack/react-query";
 import { SocketContext } from "../../contex/SocketContext";
 
 import useUserStore from "../../useStore/useUserStore";
 export default function MessageInput() {
   const [text, setText] = useState("");
-  const [loading, setLoading] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
-  const queryClient = useQueryClient();
   const { socket } = useContext(SocketContext);
   const { currentUser } = useUserStore();
   let typingTimer;
   const { isLoading, receiver, conversationId, addMessage } =
     useMessagesStore();
-
+  function generateRandomId() {
+    return Math.random().toString(36).substr(2, 9);
+  }
   async function handleMessage(e) {
     e.preventDefault();
-    setLoading(true);
     try {
-      const res = await apiRequest.post("/conversation/message", {
-        text,
-        conversationId,
+      addMessage({
+        id: generateRandomId(),
+        userId: currentUser.id,
         receiverId: receiver.id,
+        text,
+        createdAt: Date.now(),
+        read: false,
+        conversationId,
+        receiver,
       });
       setText("");
-      addMessage(res.data);
-      socket.emit("sendMessage", {
-        receiver: receiver,
-        data: res.data,
-      });
+
       setIsTyping(false);
       socket.emit("typing", {
         receiverId: receiver.id,
@@ -40,11 +38,9 @@ export default function MessageInput() {
         senderId: currentUser.id,
         typing: false,
       });
-      queryClient.invalidateQueries({ queryKey: ["conversations"] });
     } catch (error) {
+      console.log(error);
       toast.error("Something went wrong");
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -85,10 +81,10 @@ export default function MessageInput() {
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
         onBlur={handleBlur}
-        disabled={loading}
+        disabled={isLoading}
         required
       />
-      <button disabled={loading || isLoading} className="btn btn-success">
+      <button disabled={isLoading} className="btn btn-success">
         <BsSend />
       </button>
     </form>
