@@ -2,12 +2,14 @@ import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import useUserStore from "../useStore/useUserStore";
 import apiRequest from "../lib/axios";
+import toast from "react-hot-toast";
 export const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const { currentUser, setCurrentUser } = useUserStore();
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     const newSocket = io("http://localhost:3001");
@@ -45,6 +47,18 @@ export const SocketContextProvider = ({ children }) => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
+
+  useEffect(() => {
+    if (isMounted) return;
+    toast.loading(
+      "The backend of this app uses a free service which shuts down when not in use please wait 40sec for the app to load ",
+      {
+        duration: 40000,
+      }
+    );
+    
+    setIsMounted(false);
+  }, [isMounted]);
   return (
     <SocketContext.Provider value={{ socket, onlineUsers }}>
       {children}

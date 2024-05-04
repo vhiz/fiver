@@ -83,7 +83,12 @@ export default function CheckOut() {
             </div>
           ))}
         </div>
-        <button className="btn btn-success text-white">Continue</button>
+        <button
+          className="btn btn-success text-white"
+          onClick={() => toast("No payment service yet")}
+        >
+          Continue
+        </button>
       </div>
     </div>
   );

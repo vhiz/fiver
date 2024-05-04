@@ -79,7 +79,7 @@ export default function UpdateProfile() {
           ✕
         </button>
       </form>
-      <div className="w-full">
+      <div className="w-full hidden lg:block">
         <div className="stats shadow w-full">
           <div className="stat">
             <div className="stat-figure text-primary">

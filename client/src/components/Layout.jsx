@@ -38,13 +38,13 @@ export default function Layout() {
           </form>
         </dialog>
         <dialog id="sellerModal" className="modal">
-          <Seller />
+          {currentUser && <Seller />}
           <form method="dialog" className="modal-backdrop">
             <button>close</button>
           </form>
         </dialog>
         <dialog id="profileModal" className="modal">
-          <UpdateProfile />
+          {currentUser && <UpdateProfile />}
           <form method="dialog" className="modal-backdrop">
             <button>close</button>
           </form>
