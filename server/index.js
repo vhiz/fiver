@@ -2,7 +2,6 @@ import express from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import "dotenv/config.js";
 import authRoute from "./routes/authRoute.js";
 import userRoute from "./routes/userRoute.js";
 import gigRoute from "./routes/gigRoute.js";
@@ -13,7 +12,9 @@ import { app, server } from "./routes/socket.js";
 
 app.use(helmet());
 app.use(cookieParser());
-app.use(cors({ origin: [process.env.FRONTEND], credentials: true }));
+app.use(
+  cors({ origin: ["https://fiver-jnk1.onrender.com"], credentials: true })
+);
 app.use(express.json());
 
 app.use("/api/auth", authRoute);

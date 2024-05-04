@@ -7,7 +7,7 @@ export const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: [process.env.FRONTEND],
+    origin: ["https://fiver-jnk1.onrender.com"],
   },
 });
 let users = [];

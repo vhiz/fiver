@@ -12,7 +12,7 @@ export const SocketContextProvider = ({ children }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const newSocket = io("https://fiver-jnk1.onrender.com");
+    const newSocket = io("http://localhost:3001");
     setSocket(newSocket);
 
     return () => {
