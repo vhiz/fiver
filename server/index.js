@@ -2,7 +2,7 @@ import express from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
+import "dotenv/config.js";
 import authRoute from "./routes/authRoute.js";
 import userRoute from "./routes/userRoute.js";
 import gigRoute from "./routes/gigRoute.js";
