@@ -157,6 +157,15 @@ export default function Navbar() {
                   <Link to={"/messages"}>Messages</Link>
                 </li>
                 <li>
+                  <button
+                    onClick={() =>
+                      document.getElementById("profileModal").showModal()
+                    }
+                  >
+                    Profile
+                  </button>
+                </li>
+                <li>
                   <button onClick={handleLogout}>Logout</button>
                 </li>
               </ul>

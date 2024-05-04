@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import Seller from "./Seller";
 import useUserStore from "../useStore/useUserStore";
+import UpdateProfile from "./UpdateProfile";
 
 export default function Layout() {
   const { currentUser } = useUserStore();
@@ -38,6 +39,12 @@ export default function Layout() {
         </dialog>
         <dialog id="sellerModal" className="modal">
           <Seller />
+          <form method="dialog" className="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
+        <dialog id="profileModal" className="modal">
+          <UpdateProfile />
           <form method="dialog" className="modal-backdrop">
             <button>close</button>
           </form>
