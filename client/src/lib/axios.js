@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiRequest = axios.create({
-  baseURL: "http://localhost:3001/api",
+  baseURL: "https://fiver-jnk1.onrender.com/api",
   withCredentials: true,
 });
 

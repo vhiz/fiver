@@ -1,5 +1,8 @@
-import { FaFacebook } from "react-icons/fa";
+import { FaFacebook, FaGithub } from "react-icons/fa";
 import { FaInstagram, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { FaWhatsapp } from "react-icons/fa";
+import { MdWebAsset } from "react-icons/md";
 
 export default function Footer() {
   return (
@@ -12,9 +15,29 @@ export default function Footer() {
         <button className="btn btn-ghost btn-sm">
           <FaFacebook />
         </button>
-        <button className="btn btn-ghost btn-sm">
+        <Link
+          to={"https://twitter.com/The_api_guy33?t=xAKsZTpLidITkXlAGtTBWA&s=09"}
+          className="btn btn-ghost btn-sm"
+        >
           <FaXTwitter />
-        </button>
+        </Link>
+        <Link
+          to={"https://portfolio-49f29.web.app"}
+          className="btn btn-ghost btn-sm"
+        >
+          <MdWebAsset />
+        </Link>
+        <Link to={"https://github.com/vhiz"} className="btn btn-ghost btn-sm">
+          <FaGithub />
+        </Link>
+        <Link
+          to={
+            "https://api.whatsapp.com/send/?phone=09056394367&text=Hello+welcome%2C+how+may+I+be+of+assistance&type=phone_number&app_absent=0"
+          }
+          className="btn btn-ghost btn-sm"
+        >
+          <FaWhatsapp />
+        </Link>
         <button className="btn btn-ghost btn-sm">
           <FaInstagram />
         </button>
