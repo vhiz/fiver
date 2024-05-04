@@ -77,7 +77,7 @@ export async function Login(req, res) {
         id: user.id,
         isSeller: user.isSeller,
       },
-      process.env.TOKEN,
+      "ghfpifjfjgijuvhosdkdjdkdposdkisjsdososjkdjdloklcjclcjkclcjkcl",
       { expiresIn: "1d" }
     );
     return res
